@@ -11,21 +11,18 @@
         <button class="btn btn-color-2" @click="downloadPdf()">
           Download CV
         </button>
-        <!-- <button class="btn btn-color-2" href="#contact">Contact Me</button> -->
       </div>
       <div id="socials-container">
         <a
-          href="https://www.linkedin.com/in/w-jpk/"
+          href="https://t.me/wjpk_bot"
           target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img src="../assets/linkedin.png" alt="LinkedIn Logo" />
+          rel="noopener noreferrer">
+          <img src="../assets/telegram.png" alt="Telegram Logo" />
         </a>
         <a
           href="https://github.com/w-jpk"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           <img src="../assets/github.png" alt="GitHub Logo" />
         </a>
       </div>
