@@ -18,7 +18,6 @@
 <style scoped>
 nav {
   font-family: Poppins, sans-serif;
-  /* flex-direction: row; */
   justify-content: space-around;
   align-items: center;
   height: 17vh;
