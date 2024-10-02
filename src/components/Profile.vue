@@ -8,6 +8,7 @@
       <h1 class="title">W-JPK</h1>
       <p class="section__text__p2">Frontend Developer</p>
       <div class="btn-container">
+        <!-- <button class="btn btn-color-1" @click="openPdf()">Open CV</button> -->
         <button class="btn btn-color-1" @click="downloadPdf()">
           Download CV
         </button>
@@ -27,26 +28,80 @@
         </a>
       </div>
     </div>
+    <div
+      v-if="isVisible"
+      ref="scrollArrow"
+      class="scroll-down"
+      :style="{ opacity: opacityValue, transition: 'opacity 0.5s' }"
+      @click="scrollToSection">
+      <div class="arrow-circle">
+        <span class="arrow-down"></span>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
 export default {
+  data() {
+    return {
+      isVisible: false,
+      opacityValue: 0,
+    };
+  },
+  mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  beforeDestroy() {
+    window.removeEventListener("scroll", this.handleScroll);
+  },
   methods: {
+    openPdf() {
+      const pdfPath = "/cv.pdf";
+      window.open(pdfPath, "_blank");
+    },
     downloadPdf() {
       const link = document.createElement("a");
-      link.href = "../assets/cv.pdf";
+      link.href = "/cv.pdf";
       link.setAttribute("download", "cv.pdf");
       link.style.display = "none";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
     },
+    handleScroll() {
+      const profileBottom =
+        document.getElementById("profile").offsetTop +
+        document.getElementById("profile").offsetHeight;
+      const currentScroll = window.scrollY;
+
+      if (currentScroll < profileBottom - 100) {
+        if (!this.isVisible) {
+          this.isVisible = true;
+          this.$nextTick(() => {
+            this.opacityValue = 1;
+          });
+        }
+      } else {
+        if (this.isVisible) {
+          this.opacityValue = 0;
+          setTimeout(() => {
+            this.isVisible = false;
+          }, 500);
+        }
+      }
+    },
+    scrollToSection() {
+      const targetSection = document.getElementById("about");
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: "smooth" });
+      }
+    },
   },
 };
 </script>
 
-<style scoped>
+<style>
 section {
   padding-top: 4vh;
   height: 96vh;
@@ -60,6 +115,7 @@ section {
   justify-content: center;
   gap: 5rem;
   height: 80vh;
+  position: relative;
 }
 
 .section__pic-container {
@@ -136,5 +192,57 @@ section {
   background: rgb(0, 0, 0);
   border: rgb(255, 255, 255) 0.1rem solid;
   color: white;
+}
+
+.scroll-down {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.scroll-down.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.arrow-circle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: gray 0.15rem solid;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+.arrow-down {
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-top: 15px solid black;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 </style>
