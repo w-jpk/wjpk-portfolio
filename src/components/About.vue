@@ -124,7 +124,7 @@
 
 <script></script>
 
-<style scoped>
+<style>
 section {
   padding-top: 10vh;
   height: 96vh;
@@ -193,8 +193,8 @@ section {
 
 .about-containers {
   display: flex;
-  /* justify-content: start; */
-  /* align-items: center; */
+  /* justify-content: center; */
+  align-items: center;
   gap: 2rem;
   padding-top: 2rem;
   margin-bottom: 2rem;
