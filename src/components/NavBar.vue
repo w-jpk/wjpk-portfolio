@@ -14,7 +14,7 @@
 
 <script></script>
 
-<style scoped>
+<style>
 nav {
   font-family: Poppins, sans-serif;
   justify-content: space-around;
