@@ -21,8 +21,7 @@
             <h3>Experience</h3>
             <p>
               1 year <br />
-              Slujbi Arm RUSSIA MOTHER BLYAT NAXYI <br />
-              РОССИЯ РОССИЯ РОССИЯ
+              СЛУЖБЫ МАТУШКЕ РОССИИ!!! РОССИЯ!!! РОССИЯ!!! РОССИЯ!!!
             </p>
           </div>
           <div class="details-container">
@@ -31,7 +30,10 @@
               alt="Education Icon"
               class="icon" />
             <h3>Education</h3>
-            <p>21 years of education on the street</p>
+            <p>
+              21 years of education <br />
+              on the street
+            </p>
           </div>
           <!-- <div class="details-container">
             <img
@@ -144,10 +146,6 @@ section {
   gap: 2rem;
 }
 
-.pic-container {
-  margin-left: 150px;
-}
-
 .pic-container,
 .pic-container img {
   display: flex;
@@ -204,10 +202,11 @@ section {
 
 .details-container {
   display: flex;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
-  border: gray 0.15rem solid;
+  border: rgb(53, 53, 53) 0.15rem solid;
+  border-color: rgb(163, 163, 163);
   border-radius: 2rem;
   width: 100%;
   height: 100%;
@@ -216,8 +215,7 @@ section {
   text-align: center;
 }
 
-.details-container p,
-img {
+.details-container p {
   padding-top: 1rem;
 }
 
@@ -225,7 +223,7 @@ img {
   padding-top: 2rem;
   text-align: justify;
   flex-wrap: wrap;
-  margin-right: 150px;
+  /* margin-right: 150px; */
   font-family: Poppins, sans-serif;
   color: gray;
   font-weight: 500;

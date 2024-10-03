@@ -136,7 +136,8 @@ article {
   justify-content: start;
   align-items: center;
   flex-direction: column;
-  border: gray 0.15rem solid;
+  border: rgb(53, 53, 53) 0.15rem solid;
+  border-color: rgb(163, 163, 163);
   border-radius: 2rem;
   width: 40%;
   height: auto;

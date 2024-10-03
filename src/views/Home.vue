@@ -4,6 +4,7 @@
   <About />
   <Experience />
   <Projects />
+  <Contact />
 </template>
 
 <script>
@@ -12,6 +13,7 @@ import Profile from "../components/Profile.vue";
 import About from "../components/About.vue";
 import Experience from "../components/Experience.vue";
 import Projects from "../components/Projects.vue";
+import Contact from "../components/Contact.vue";
 
 export default {
   name: "Home",
@@ -21,6 +23,7 @@ export default {
     About,
     Experience,
     Projects,
+    Contact,
   },
 };
 </script>
