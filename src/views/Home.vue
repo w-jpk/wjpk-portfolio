@@ -5,6 +5,7 @@
   <Experience />
   <Projects />
   <Contact />
+  <FooterBar />
 </template>
 
 <script>
@@ -14,6 +15,7 @@ import About from "../components/About.vue";
 import Experience from "../components/Experience.vue";
 import Projects from "../components/Projects.vue";
 import Contact from "../components/Contact.vue";
+import FooterBar from "../components/Footer.vue";
 
 export default {
   name: "Home",
@@ -24,6 +26,7 @@ export default {
     Experience,
     Projects,
     Contact,
+    FooterBar,
   },
 };
 </script>
