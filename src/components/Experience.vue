@@ -5,99 +5,43 @@
       <h1 class="title">Experience</h1>
     </div>
     <div class="experience-details-container">
-      <div class="about-containers" style="justify-content: center">
-        <div class="details__containers">
-          <h2 class="experience-sub-title">Frontend Development</h2>
-          <div class="article-container">
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>HTML</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>CSS</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>JS</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>VUE</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>Name</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>Name</h3>
-                <p>Experience</p>
-              </div>
-            </article>
+      <div class="experience-info" style="justify-content: center">
+        <div class="grid">
+          <div class="grid-card">
+            <i><font-awesome-icon icon="fa-solid fa-code" /></i>
+            <span>Frontend Development</span>
+            <h3>1 Year</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea omnis
+              labore nostrum explicabo aperiam vitae.
+            </p>
           </div>
-        </div>
-        <div class="details__containers">
-          <h2 class="experience-sub-title">Backend Development</h2>
-          <div class="article-container">
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>SQL</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>Node.js</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>Name</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>Name</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>Name</h3>
-                <p>Experience</p>
-              </div>
-            </article>
-            <article>
-              <img src="../assets/checkmark.png" alt="Checkmark" class="icon" />
-              <div class="article-text">
-                <h3>Name</h3>
-                <p>Experience</p>
-              </div>
-            </article>
+          <div class="grid-card">
+            <i><font-awesome-icon icon="fa-solid fa-code" /></i>
+            <span>Frontend Development</span>
+            <h3>1 Year</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea omnis
+              labore nostrum explicabo aperiam vitae.
+            </p>
+          </div>
+          <div class="grid-card">
+            <i><font-awesome-icon icon="fa-solid fa-code" /></i>
+            <span>Frontend Development</span>
+            <h3>1 Year</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea omnis
+              labore nostrum explicabo aperiam vitae.
+            </p>
+          </div>
+          <div class="grid-card">
+            <i><font-awesome-icon icon="fa-solid fa-code" /></i>
+            <span>Frontend Development</span>
+            <h3>1 Year</h3>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea omnis
+              labore nostrum explicabo aperiam vitae.
+            </p>
           </div>
         </div>
       </div>
@@ -131,19 +75,49 @@ article {
   flex-direction: column;
 }
 
-.details__containers {
+.experience-info {
   display: flex;
-  justify-content: start;
   align-items: center;
+  justify-content: center;
+  gap: 5rem;
+  margin-top: 3rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.grid-card {
+  border: 2px solid black;
+  border-radius: 3rem;
+  padding: 3rem;
+  display: flex;
   flex-direction: column;
-  border: rgb(53, 53, 53) 0.15rem solid;
-  border-color: rgb(163, 163, 163);
-  border-radius: 2rem;
-  width: 40%;
-  height: auto;
-  padding: 20px;
-  /* overflow: hidden; */
-  text-align: center;
+  align-items: baseline;
+  justify-content: left;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+
+.grid-card:hover {
+  transform: scale(1.02);
+  background-color: black;
+  color: white;
+}
+
+.grid-card i {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.grid-card span {
+  font-size: 1.5rem;
+  font-weight: 600;
+  background: linear-gradient(to right, rgb(0, 157, 255), rgb(255, 0, 255));
+  background-clip: text;
+  color: transparent;
 }
 
 .details__containers p {
