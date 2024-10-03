@@ -10,8 +10,9 @@
         </ul>
       </div>
     </nav>
-    <p class="about__text-p1" style="margin-bottom: 3rem">
-      Copyright &#169; 2024 <a href="https://github.com/w-jpk">W-JPK</a>. All
+    <p class="footer-text">
+      Copyright &#169; 2024
+      <a href="https://github.com/w-jpk" class="footer-link">W-JPK</a>. All
       Rights Reserved.
     </p>
   </section>
@@ -30,7 +31,19 @@
   text-align: center;
 }
 
-.about__text-p1 a {
-  color: gray;
+.footer-text {
+  font-size: 0.9rem;
+  color: #6c757d;
+  text-align: center;
+}
+
+.footer-text .footer-link {
+  color: #5a5a5a;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer-text .footer-link:hover {
+  color: #007bff;
 }
 </style>

@@ -3,7 +3,9 @@
 </template>
 
 <script>
-import Home from "./views/Home.vue";
+import Home from "@/pages/Home.vue";
+import "@fortawesome/fontawesome-free/css/all.css";
+import "@fortawesome/fontawesome-free/js/all.js";
 
 export default {
   name: "App",
@@ -35,13 +37,4 @@ section {
 html {
   scroll-behavior: smooth;
 }
-
-/* p {
-  color: rgb(85, 85, 85);
-} */
-
-/* a,
-.btn {
-  transition: all 300ms ease;
-} */
 </style>
