@@ -209,8 +209,8 @@ section {
   flex-direction: column;
   border: gray 0.15rem solid;
   border-radius: 2rem;
-  width: 350px;
-  height: 150px;
+  width: 100%;
+  height: 100%;
   padding: 20px;
   overflow: hidden;
   text-align: center;
