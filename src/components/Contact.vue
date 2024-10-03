@@ -10,14 +10,18 @@
           src="../assets/email.png"
           alt="Email icon"
           class="icon contact-icon email-icon" />
-        <p><a href="mailto:gizbrekht.y@bk.ru">gizbrekht.y@bk.ru</a></p>
+        <p class="about__text-p1">
+          <a href="mailto:gizbrekht.y@bk.ru">gizbrekht.y@bk.ru</a>
+        </p>
       </div>
       <div class="contact-info-container">
         <img
           src="../assets/github.png"
           alt="Github icon"
           class="icon contact-icon" />
-        <p><a href="https://www.github.com">GitHub</a></p>
+        <p class="about__text-p1">
+          <a href="https://www.github.com/w-jpk">GitHub</a>
+        </p>
       </div>
     </div>
   </section>
