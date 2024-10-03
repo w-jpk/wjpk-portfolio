@@ -102,26 +102,17 @@ export default {
 </script>
 
 <style>
-section {
-  padding-top: 4vh;
-  height: 96vh;
-  margin: 0 10rem;
-  box-sizing: border-box;
-  min-height: fit-content;
-}
-
 #profile {
   display: flex;
   justify-content: center;
   gap: 5rem;
   height: 80vh;
-  position: relative;
 }
 
 .section__pic-container {
   display: flex;
-  height: 500px;
-  width: 500px;
+  height: 400px;
+  width: 400px;
   margin: auto 0;
 }
 
@@ -147,7 +138,9 @@ section {
   margin-bottom: 1rem;
   text-align: center;
   font-weight: 600;
-  color: gray;
+  background: linear-gradient(to right, rgb(0, 157, 255), rgb(255, 0, 255));
+  background-clip: text;
+  color: transparent;
 }
 
 .title {

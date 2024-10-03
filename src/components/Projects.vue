@@ -77,10 +77,6 @@
 <script></script>
 
 <style>
-#projects {
-  position: relative;
-}
-
 .color-container {
   border-color: rgb(163, 163, 163);
   background: rgb(250, 250, 250);

@@ -12,10 +12,30 @@
   </nav>
 </template>
 
-<script></script>
+<script>
+
+</script>
 
 <style>
+/* #nav {
+  position: fixed;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(8px);
+  color: white;
+  padding: 0.5rem 1.5rem;
+  border-radius: 3rem;
+  z-index: 1000;
+} */
+
 nav {
+  display: flex;
   font-family: Poppins, sans-serif;
   justify-content: space-around;
   align-items: center;
