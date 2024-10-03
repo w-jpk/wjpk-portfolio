@@ -10,7 +10,7 @@
           src="../assets/email.png"
           alt="Email icon"
           class="icon contact-icon email-icon" />
-        <p><a href="mailto:examplemail@gmail.com">Example@gmail.com</a></p>
+        <p><a href="mailto:gizbrekht.y@bk.ru">gizbrekht.y@bk.ru</a></p>
       </div>
       <div class="contact-info-container">
         <img
