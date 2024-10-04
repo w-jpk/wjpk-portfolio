@@ -1,5 +1,5 @@
 <template>
-  <section id="about">
+  <section id="about" ref="about">
     <Title title="About Me" subtitle="Get To Know More" />
     <div class="section-container">
       <div class="pic-container">
@@ -41,6 +41,7 @@
         </div>
       </div>
     </div>
+    <ScrollArrow :nextSectionId="'experience'" />
   </section>
 </template>
 
@@ -48,11 +49,13 @@
 import Title from "@/components/Title.vue";
 import Details from "@/components/Details.vue";
 import { details } from "@/components/data/details";
+import ScrollArrow from "@/components/ScrollArrow.vue";
 
 export default {
   components: {
     Title,
     Details,
+    ScrollArrow,
   },
   data() {
     return {

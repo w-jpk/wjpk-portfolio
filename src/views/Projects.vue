@@ -7,6 +7,7 @@
         :key="index"
         :project="project" />
     </div>
+    <ScrollArrow :nextSectionId="'contact'" />
   </section>
 </template>
 
@@ -14,11 +15,13 @@
 import Title from "@/components/Title.vue";
 import ProjectCard from "@/components/ProjectCard.vue";
 import { projects } from "@/components/data/projects";
+import ScrollArrow from "@/components/ScrollArrow.vue";
 
 export default {
   components: {
     Title,
     ProjectCard,
+    ScrollArrow,
   },
   data() {
     return {
