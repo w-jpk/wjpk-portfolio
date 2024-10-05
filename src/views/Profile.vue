@@ -26,7 +26,10 @@
         </a>
       </div>
     </div>
-    <ScrollArrow v-if="isScrollArrowVisible" :nextSectionId="'about'" :targetSection="profileSection" />
+    <ScrollArrow
+      v-if="isScrollArrowVisible"
+      :nextSectionId="'about'"
+      :targetSection="profileSection" />
   </section>
 </template>
 
@@ -88,7 +91,7 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 5rem;
-  height: 80vh;
+  height: 87vh;
   position: relative;
 }
 
@@ -147,4 +150,3 @@ export default {
   transform: scale(1.1);
 }
 </style>
-

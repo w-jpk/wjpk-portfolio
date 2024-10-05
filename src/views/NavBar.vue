@@ -20,7 +20,7 @@ nav {
   font-family: Poppins, sans-serif;
   justify-content: space-around;
   align-items: center;
-  height: 17vh;
+  height: 10vh;
 }
 
 nav,
