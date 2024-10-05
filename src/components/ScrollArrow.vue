@@ -20,9 +20,19 @@ export default {
   },
   data() {
     return {
-      isVisible: true,
+      isVisible: false, // Начальное состояние - стрелка невидима
       observer: null,
     };
+  },
+  watch: {
+    isVisible(newVal) {
+      // Отслеживание изменения видимости стрелки
+      if (newVal) {
+        this.fadeIn();
+      } else {
+        this.fadeOut();
+      }
+    },
   },
   mounted() {
     if (this.targetSection) {
@@ -69,15 +79,26 @@ export default {
       );
       this.observer.observe(this.$el.parentNode);
     },
+    fadeIn() {
+      const arrow = this.$el;
+      arrow.style.transition = "opacity 0.5s ease-in-out";
+      arrow.style.opacity = 1;
+    },
+    fadeOut() {
+      const arrow = this.$el;
+      arrow.style.transition = "opacity 0.5s ease-in-out";
+      arrow.style.opacity = 0;
+    },
   },
 };
 </script>
 
 <style scoped>
 .scroll-arrow {
-  position: fixed;
+  position: absolute;
   bottom: 30px;
-  right: 30px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 50px;
   height: 50px;
   border: 2px solid black;
@@ -86,9 +107,9 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: transform 0.3s ease, opacity 0.3s ease;
-  opacity: 1;
-  z-index: 100;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  opacity: 0; /* Начальное состояние - невидимо */
+  z-index: 1;
   animation: bounce 2s infinite;
 }
 
@@ -102,7 +123,6 @@ export default {
 }
 
 .scroll-arrow--hidden {
-  opacity: 0;
   pointer-events: none;
 }
 
@@ -130,4 +150,3 @@ export default {
   }
 }
 </style>
-

@@ -26,7 +26,7 @@
         </a>
       </div>
     </div>
-    <ScrollArrow :nextSectionId="'about'" />
+    <ScrollArrow v-if="isScrollArrowVisible" :nextSectionId="'about'" :targetSection="profileSection" />
   </section>
 </template>
 
@@ -39,6 +39,21 @@ export default {
     Btn,
     ScrollArrow,
   },
+  data() {
+    return {
+      isScrollArrowVisible: false,
+      profileSection: null,
+    };
+  },
+  mounted() {
+    this.profileSection = this.$refs.profile;
+    this.observeProfileSection();
+  },
+  beforeDestroy() {
+    if (this.observer) {
+      this.observer.disconnect();
+    }
+  },
   methods: {
     downloadPdf() {
       const link = document.createElement("a");
@@ -47,6 +62,21 @@ export default {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
+    },
+    observeProfileSection() {
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0];
+          this.isScrollArrowVisible = entry.isIntersecting;
+        },
+        {
+          root: null,
+          threshold: 0.1,
+        }
+      );
+      if (this.profileSection) {
+        this.observer.observe(this.profileSection);
+      }
     },
   },
 };
@@ -117,3 +147,4 @@ export default {
   transform: scale(1.1);
 }
 </style>
+

@@ -14,7 +14,6 @@
         </div>
       </div>
     </div>
-    <ScrollArrow :nextSectionId="'projects'" />
   </section>
 </template>
 
@@ -22,13 +21,11 @@
 import ExperienceCard from "@/components/ExperienceCard.vue";
 import { exps } from "@/components/data/data";
 import Title from "@/components/Title.vue";
-import ScrollArrow from "@/components/ScrollArrow.vue";
 
 export default {
   components: {
     ExperienceCard,
     Title,
-    ScrollArrow,
   },
   data() {
     return {
@@ -62,3 +59,4 @@ export default {
   gap: 2rem;
 }
 </style>
+
