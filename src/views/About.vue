@@ -1,42 +1,32 @@
 <template>
-  <section id="about" ref="about">
+  <section id="about" ref="about" class="about-section">
     <Title title="About Me" subtitle="Get To Know More" />
+
     <div class="section-container">
-      <div class="pic-container">
+      <div class="pic-container observer-item">
         <img
           src="../assets/Experience.jpg"
           alt="Profile Picture"
           class="about-pic" />
       </div>
 
-      <div class="about-details-container">
+      <div class="about-details-container observer-item">
         <div class="about-containers">
           <Details
             v-for="(detail, index) in details"
             :key="index"
             :icon="detail.icon"
             :title="detail.title"
-            :description="detail.description" />
+            :description="detail.description"
+            class="observer-item" />
         </div>
-        <div class="text-container">
+
+        <div class="text-container observer-item">
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
             corporis natus suscipit, aut quia impedit soluta assumenda modi
             laborum laboriosam ut odit accusamus! Porro id, vero provident
-            architecto ratione nam! Exercitationem aliquam optio nam totam
-            incidunt excepturi? Quaerat perferendis, odit modi nihil aspernatur
-            error accusamus nostrum labore pariatur quas provident quibusdam
-            corporis iure voluptatibus dicta quo blanditiis a tenetur mollitia?
-            Cumque officiis, neque exercitationem, quidem sunt, quisquam
-            corporis vel distinctio esse quam cupiditate nostrum ipsa? Molestiae
-            ad amet dicta architecto sit natus illum facere. Facere, vero? Culpa
-            natus perspiciatis neque! Minima maxime voluptatibus doloribus
-            molestiae dicta, veniam accusamus amet, animi, porro nihil ad soluta
-            a itaque eligendi. Nobis, nemo velit? Animi quam officia aperiam
-            inventore alias sapiente adipisci, ratione unde! Aspernatur
-            inventore earum maxime at molestiae pariatur fuga repellat quia eius
-            quam aliquid sapiente corporis repudiandae quaerat natus alias amet
-            veritatis illo eveniet nihil, in possimus autem animi! Ratione, ea.
+            architecto ratione nam!
           </p>
         </div>
       </div>
@@ -58,6 +48,35 @@ export default {
     return {
       details,
     };
+  },
+  mounted() {
+    this.observeSections(); // Вызываем метод отслеживания элементов при монтировании
+  },
+  methods: {
+    observeSections() {
+      const options = {
+        root: null, // Отслеживание в пределах всего окна
+        threshold: 0.1, // Срабатывание при видимости 10% элемента
+      };
+      const observer = new IntersectionObserver(this.handleIntersect, options);
+
+      // Находим все элементы, которые должны наблюдаться
+      const items = this.$el.querySelectorAll(".observer-item");
+
+      // Применяем наблюдение ко всем элементам
+      items.forEach((item) => observer.observe(item));
+    },
+    handleIntersect(entries) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("fade-in");
+          entry.target.classList.remove("fade-out");
+        } else {
+          entry.target.classList.add("fade-out");
+          entry.target.classList.remove("fade-in");
+        }
+      });
+    },
   },
 };
 </script>
@@ -110,31 +129,19 @@ export default {
   line-height: 1.6;
 }
 
-.details-container p {
-  font-weight: 600;
-  color: gray;
+.observer-item {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
 }
 
-.title {
-  font-size: 3rem;
-  text-align: center;
+.fade-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.icon {
-  height: 2rem;
-}
-
-.about__text-p1 {
-  text-align: center;
-  font-weight: 600;
-  color: gray;
-}
-
-.details-container {
-  transition: transform 0.3s ease;
-}
-
-.details-container:hover {
-  transform: scale(1.05);
+.fade-out {
+  opacity: 0;
+  transform: translateY(20px);
 }
 </style>
