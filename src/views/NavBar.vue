@@ -3,10 +3,10 @@
     <div class="logo">W-JPK</div>
     <div>
       <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#experience">Experience</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
+        <li><a href="/#about">About</a></li>
+        <li><a href="/#experience">Experience</a></li>
+        <li><a href="/#projects">Projects</a></li>
+        <li><a href="/#contact">Contact</a></li>
       </ul>
     </div>
   </nav>
@@ -14,7 +14,7 @@
 
 <script></script>
 
-<style>
+<style scoped>
 nav {
   display: flex;
   font-family: Poppins, sans-serif;
@@ -34,25 +34,22 @@ nav,
   font-size: 1.5rem;
 }
 
-a {
+.nav-links a {
   text-decoration: none;
   text-decoration-color: white;
   color: black;
-}
 
-a:hover {
-  color: gray;
-  text-decoration: underline;
-  text-underline-offset: 0.8rem;
-  text-decoration-color: gray;
+  &:hover {
+    color: gray;
+    text-decoration: underline;
+    text-underline-offset: 0.8rem;
+    text-decoration-color: gray;
+  }
 }
 
 .logo {
   font-size: 2rem;
   font-weight: bold;
-}
-
-.logo:hover {
   cursor: default;
 }
 </style>

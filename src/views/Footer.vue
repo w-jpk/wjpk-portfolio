@@ -20,7 +20,7 @@
 
 <script></script>
 
-<style>
+<style scoped>
 #footer {
   height: 26vh;
   margin: 0 1rem;
@@ -29,6 +29,32 @@
 #footer p {
   font-family: Poppins, sans-serif;
   text-align: center;
+}
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.nav-links {
+  gap: 2rem;
+  list-style: none;
+  font-size: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  text-decoration-color: white;
+  color: black;
+
+  &:hover {
+    color: gray;
+    text-decoration: underline;
+    text-underline-offset: 0.8rem;
+    text-decoration-color: gray;
+  }
 }
 
 .footer-text {

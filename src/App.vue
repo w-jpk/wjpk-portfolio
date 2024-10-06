@@ -1,16 +1,17 @@
 <template>
-  <Home />
+  <NavBar />
+  <router-view />
 </template>
 
 <script>
-import Home from "@/pages/Home.vue";
+import NavBar from "@/views/NavBar.vue";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 
 export default {
   name: "App",
   components: {
-    Home,
+    NavBar,
   },
 };
 </script>

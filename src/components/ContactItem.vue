@@ -44,4 +44,17 @@ export default {
 .about__text-p1 {
   font-size: larger;
 }
+
+.about__text-p1 a {
+  text-decoration: none;
+  text-decoration-color: white;
+  color: gray;
+
+  &:hover {
+    color: gray;
+    text-decoration: underline;
+    text-underline-offset: 0.8rem;
+    text-decoration-color: gray;
+  }
+}
 </style>
