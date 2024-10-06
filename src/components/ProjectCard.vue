@@ -1,8 +1,10 @@
 <template>
-  <div class="project-card" @click="handleHover">
-    <img :src="project.image" :alt="project.title" />
-    <h3>{{ project.title }}</h3>
-    <p>{{ project.description }}</p>
+  <div class="project-card">
+    <div @click="handleHover">
+      <img :src="project.image" :alt="project.title" />
+      <h3>{{ project.title }}</h3>
+      <p>{{ project.description }}</p>
+    </div>
     <div class="btn-group">
       <a :href="project.liveDemoLink" class="btn" target="_blank">Live Demo</a>
       <a :href="project.githubLink" class="btn" target="_blank">Github Repo</a>
@@ -21,6 +23,7 @@ export default {
   methods: {
     handleHover(event) {
       event.currentTarget.classList.toggle("hover");
+      this.$router.push({ path: `/project` });
     },
   },
 };

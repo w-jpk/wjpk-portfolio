@@ -80,4 +80,3 @@ export default {
   transform: translateY(20px);
 }
 </style>
-
