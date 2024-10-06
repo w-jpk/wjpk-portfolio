@@ -20,7 +20,7 @@ export default {
   },
   data() {
     return {
-      isVisible: false, // Начальное состояние - стрелка невидима
+      isVisible: false,
       observer: null,
     };
   },
@@ -108,7 +108,7 @@ export default {
   justify-content: center;
   align-items: center;
   transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0; /* Начальное состояние - невидимо */
+  opacity: 0;
   z-index: 1;
   animation: bounce 2s infinite;
 }

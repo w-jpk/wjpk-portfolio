@@ -8,7 +8,7 @@
     </div>
     <div class="profile__text">
       <p class="profile__subtitle">Hello, I'm</p>
-      <h1 class="profile__title">W-JPK</h1>
+      <h1 class="profile__title">{{ $store.state.name }}</h1>
       <p class="profile__role">Frontend Developer</p>
       <Btn :downloadPdf="downloadPdf" name="Download CV" />
       <div class="socials-container">

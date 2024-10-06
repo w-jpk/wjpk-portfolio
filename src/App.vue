@@ -1,5 +1,6 @@
 <template>
   <NavBar />
+  <ButtonTop />
   <router-view />
 </template>
 
@@ -7,11 +8,13 @@
 import NavBar from "@/views/NavBar.vue";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
+import ButtonTop from "./components/ButtonTop.vue";
 
 export default {
   name: "App",
   components: {
     NavBar,
+    ButtonTop,
   },
 };
 </script>

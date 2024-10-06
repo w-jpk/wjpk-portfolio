@@ -13,7 +13,7 @@
       <div class="about-details-container observer-item">
         <div class="about-containers">
           <Details
-            v-for="(detail, index) in details"
+            v-for="(detail, index) in $store.state.details"
             :key="index"
             :icon="detail.icon"
             :title="detail.title"
@@ -37,17 +37,11 @@
 <script>
 import Title from "@/components/Title.vue";
 import Details from "@/components/Details.vue";
-import { details } from "@/components/data/details";
 
 export default {
   components: {
     Title,
     Details,
-  },
-  data() {
-    return {
-      details,
-    };
   },
   mounted() {
     this.observeSections(); // Вызываем метод отслеживания элементов при монтировании

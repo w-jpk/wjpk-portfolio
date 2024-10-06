@@ -6,8 +6,8 @@
       <div class="experience-info">
         <div class="experience-grid">
           <ExperienceCard
-            v-for="exp in exps"
-            :key="exp.id"
+            v-for="(exp, index) in $store.state.exps"
+            :key="index"
             :icon="exp.icon"
             :title="exp.title"
             :years="exp.years"
@@ -21,18 +21,12 @@
 
 <script>
 import ExperienceCard from "@/components/ExperienceCard.vue";
-import { exps } from "@/components/data/data";
 import Title from "@/components/Title.vue";
 
 export default {
   components: {
     ExperienceCard,
     Title,
-  },
-  data() {
-    return {
-      exps,
-    };
   },
   mounted() {
     this.observeExperienceSection();

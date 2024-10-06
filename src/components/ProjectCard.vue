@@ -41,7 +41,7 @@ export default {
   border: 2px solid black;
   border-radius: 1.5rem;
   cursor: pointer;
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  transition: transform 0.3s ease, all 0.3s linear;
   background-color: #f8f8f8;
 }
 

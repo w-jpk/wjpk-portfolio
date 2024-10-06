@@ -4,7 +4,7 @@
 
     <div class="projects-grid observer-item">
       <ProjectCard
-        v-for="(project, index) in projects"
+        v-for="(project, index) in $store.state.projects"
         :key="index"
         :project="project"
         class="observer-item" />
@@ -15,17 +15,11 @@
 <script>
 import Title from "@/components/Title.vue";
 import ProjectCard from "@/components/ProjectCard.vue";
-import { projects } from "@/components/data/projects";
 
 export default {
   components: {
     Title,
     ProjectCard,
-  },
-  data() {
-    return {
-      projects,
-    };
   },
   mounted() {
     this.observeProjectsSection();
