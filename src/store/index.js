@@ -1,7 +1,18 @@
 import { createStore } from "vuex";
+import { auth } from "../admin/data/firebaseConfig";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  signOut,
+  onAuthStateChanged,
+} from "firebase/auth";
 
 export default createStore({
   state: {
+    user: null,
+    isAuthenticated: false,
+    authError: null,
+    loading: false,
     name: "W-JPK",
     exps: [
       {
@@ -73,12 +84,71 @@ export default createStore({
     ],
   },
   getters: {
-    
+    isAuthenticated(state) {
+      return state.user !== null;
+    },
+    authError(state) {
+      return state.authError;
+    },
+    currentUser: (state) => state.user,
+    isLoading(state) {
+      return state.loading;
+    },
   },
   mutations: {
-
+    SET_USER(state, user) {
+      state.user = user;
+      state.isAuthenticated = !!user;
+    },
+    SET_AUTH_ERROR(state, error) {
+      state.authError = error;
+    },
+    LOGOUT(state) {
+      state.user = null;
+      state.isAuthenticated = false;
+    },
+    SET_LOADING(state, loading) {
+      state.loading = loading;
+    },
   },
   actions: {
-
+    async login({ commit }, { email, password }) {
+      commit("SET_LOADING", true); // Установка состояния загрузки
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        commit("SET_USER", userCredential.user);
+        commit("SET_AUTH_ERROR", null); // Сброс ошибки
+      } catch (error) {
+        commit("SET_USER", null);
+        commit(
+          "SET_AUTH_ERROR",
+          "Ошибка входа. Проверьте правильность данных."
+        ); // Установка ошибки
+      } finally {
+        commit("SET_LOADING", false); // Сброс состояния загрузки
+      }
+    },
+    async logout({ commit }) {
+      try {
+        await signOut(auth);
+        commit("LOGOUT");
+      } catch (error) {
+        console.error("Ошибка выхода:", error);
+      }
+    },
+    async setUser({ commit }, user) {
+      commit("SET_USER", user);
+    },
+    async checkAuth({ commit }) {
+      commit("SET_LOADING", true); // Установка состояния загрузки
+      onAuthStateChanged(auth, (user) => {
+        commit("SET_USER", user);
+        commit("SET_LOADING", false); // Сброс состояния загрузки после проверки
+      });
+    },
   },
 });

@@ -1,4 +1,5 @@
 <template>
+  <NavBar />
   <div class="single-project">
     <ProjectHeader :singleProjectHeader="singleProjectHeader" />
     <ProjectGallery :projectImages="projectImages" />
@@ -7,12 +8,14 @@
 </template>
 
 <script>
+import NavBar from "@/views/NavBar.vue";
 import ProjectHeader from "@/components/projects/ProjectHeader.vue";
 import ProjectGallery from "@/components/projects/ProjectGallary.vue";
 import ProjectInfo from "@/components/projects/ProjectInfo.vue";
 
 export default {
   components: {
+    NavBar,
     ProjectHeader,
     ProjectGallery,
     ProjectInfo,

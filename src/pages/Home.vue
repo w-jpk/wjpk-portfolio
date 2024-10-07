@@ -1,4 +1,5 @@
 <template>
+  <NavBar />
   <Profile />
   <About />
   <Experience />
@@ -8,6 +9,7 @@
 </template>
 
 <script>
+import NavBar from "../views/NavBar.vue";
 import Profile from "../views/Profile.vue";
 import About from "../views/About.vue";
 import Experience from "../views/Experience.vue";
@@ -18,6 +20,7 @@ import FooterBar from "../views/Footer.vue";
 export default {
   name: "Home",
   components: {
+    NavBar,
     Profile,
     About,
     Experience,
