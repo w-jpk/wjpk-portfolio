@@ -1,35 +1,35 @@
 <template>
-  <div class="admin-page">
-    <h1>Добавление товара</h1>
-    <form @submit.prevent="addProduct">
+  <div v-if="isAuthenticated" class="admin-page">
+    <h1 style="margin: 0 0 1rem 0">Добавление проекта</h1>
+    <form @submit.prevent="addProject">
       <div class="form-group">
-        <label for="productName">Название товара</label>
-        <input type="text" id="productName" v-model="productName" required />
+        <label for="projectName">Название проекта</label>
+        <input type="text" id="projectName" v-model="projectName" required />
       </div>
       <div class="form-group">
-        <label for="productDescription">Описание товара</label>
-        <textarea
-          id="productDescription"
-          v-model="productDescription"
-          required></textarea>
-      </div>
-      <div class="form-group">
-        <label for="productPrice">Цена товара</label>
+        <label for="projectDescription">Описание проекта</label>
         <input
-          type="number"
-          id="productPrice"
-          v-model="productPrice"
+          id="projectDescription"
+          v-model="projectDescription"
+          required></input>
+      </div>
+      <div class="form-group">
+        <label for="projectPrice">Тэг проекта</label>
+        <input
+          type="text"
+          id="projectPrice"
+          v-model="projectPrice"
           required />
       </div>
       <div class="form-group">
-        <label for="productImage">Изображение товара</label>
+        <label for="projectImage">Изображение проекта</label>
         <input
           type="file"
-          id="productImage"
+          id="projectImage"
           @change="onFileChange"
           accept="image/*" />
       </div>
-      <button type="submit">Добавить товар</button>
+      <button type="submit">Добавить проект</button>
     </form>
 
     <div class="product-preview" v-if="previewImage">
@@ -37,16 +37,35 @@
       <img :src="previewImage" alt="Предпросмотр" />
     </div>
   </div>
+  <div v-else>
+    <h1 style="color: red">Access Denied</h1>
+    <p style="display: flex; justify-content: center">
+      <a href="/adm-login">Please log in</a>
+    </p>
+  </div>
 </template>
 
 <script>
+import { computed } from "vue";
+import { useStore } from "vuex";
+
 export default {
   name: "AdmPage",
+  setup() {
+    const store = useStore();
+    const isAuthenticated = computed(() => store.getters.isAuthenticated);
+    const user = computed(() => store.getters.user);
+
+    return {
+      isAuthenticated,
+      user,
+    };
+  },
   data() {
     return {
-      productName: "",
-      productDescription: "",
-      productPrice: null,
+      projectName: "",
+      projectDescription: "",
+      projectPrice: null,
       previewImage: null,
     };
   },
@@ -63,9 +82,9 @@ export default {
     },
     addProduct() {
       console.log("Товар добавлен:", {
-        name: this.productName,
-        description: this.productDescription,
-        price: this.productPrice,
+        name: this.projectName,
+        description: this.projectDescription,
+        price: this.projectPrice,
       });
     },
   },

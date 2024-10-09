@@ -1,18 +1,12 @@
 import { createStore } from "vuex";
-import { auth } from "../admin/data/firebaseConfig";
-import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged,
-} from "firebase/auth";
+import axios from "axios";
 
 export default createStore({
   state: {
+    token: localStorage.getItem("token") || "",
     user: null,
-    isAuthenticated: false,
-    authError: null,
-    loading: false,
+    users: [],
+    feedback: null,
     name: "W-JPK",
     exps: [
       {
@@ -74,81 +68,108 @@ export default createStore({
       {
         icon: "briefcase",
         title: "Experience",
-        description: `1 year <br /> СЛУЖБЫ МАТУШКЕ РОССИИ!!! РОССИЯ!!! РОССИЯ!!! РОССИЯ!!!`,
+        description:
+          "1 year <br /> СЛУЖБЫ МАТУШКЕ РОССИИ!!! РОССИЯ!!! РОССИЯ!!! РОССИЯ!!!",
       },
       {
         icon: "graduation-cap",
         title: "Education",
-        description: `21 years of education <br /> on the street`,
+        description: "21 years of education <br /> on the street",
       },
     ],
   },
   getters: {
-    isAuthenticated(state) {
-      return state.user !== null;
-    },
-    authError(state) {
-      return state.authError;
-    },
-    currentUser: (state) => state.user,
-    isLoading(state) {
-      return state.loading;
-    },
+    isAuthenticated: (state) => !!state.token,
+    user: (state) => state.user,
+    users: (state) => state.users,
+    feedback: (state) => state.feedback,
   },
   mutations: {
+    SET_TOKEN(state, token) {
+      state.token = token;
+      localStorage.setItem("token", token);
+    },
     SET_USER(state, user) {
       state.user = user;
-      state.isAuthenticated = !!user;
+      localStorage.setItem("user", JSON.stringify(user));
     },
-    SET_AUTH_ERROR(state, error) {
-      state.authError = error;
+    SET_USERS(state, users) {
+      state.users = users;
     },
     LOGOUT(state) {
+      state.token = "";
       state.user = null;
-      state.isAuthenticated = false;
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
-    SET_LOADING(state, loading) {
-      state.loading = loading;
+    SET_FEEDBACK(state, feedback) {
+      state.feedback = feedback;
     },
   },
   actions: {
-    async login({ commit }, { email, password }) {
-      commit("SET_LOADING", true); // Установка состояния загрузки
+    async register({ commit }, { email, password }) {
       try {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          email,
-          password
-        );
-        commit("SET_USER", userCredential.user);
-        commit("SET_AUTH_ERROR", null); // Сброс ошибки
+        await axios.post("http://localhost:5000/register", { email, password });
       } catch (error) {
-        commit("SET_USER", null);
-        commit(
-          "SET_AUTH_ERROR",
-          "Ошибка входа. Проверьте правильность данных."
-        ); // Установка ошибки
-      } finally {
-        commit("SET_LOADING", false); // Сброс состояния загрузки
+        console.error("Registration failed:", error);
+        throw error;
+      }
+    },
+    async feedback({ commit }, { name, email, website, message }) {
+      try {
+        await axios.post("http://localhost:5000/feedback", {
+          name,
+          email,
+          website,
+          message,
+        });
+      } catch (error) {
+        console.error("Feedback submission failed:", error);
+        throw error;
+      }
+    },
+    async login({ commit, dispatch }, { email, password }) {
+      try {
+        const response = await axios.post("http://localhost:5000/login", {
+          email,
+          password,
+        });
+        commit("SET_TOKEN", response.data.token);
+        await dispatch("fetchUser");
+      } catch (error) {
+        console.error("Login failed:", error);
+        throw error;
+      }
+    },
+    async fetchUser({ commit, state }) {
+      const cachedUser = localStorage.getItem("user");
+      if (cachedUser) {
+        commit("SET_USER", JSON.parse(cachedUser));
+      } else if (state.token) {
+        try {
+          const userResponse = await axios.get("http://localhost:5000/auth", {
+            headers: { Authorization: `Bearer ${state.token}` },
+          });
+          commit("SET_USER", userResponse.data.user);
+        } catch (error) {
+          console.error("Failed to fetch user data:", error);
+          commit("LOGOUT");
+        }
+      }
+    },
+    async fetchUsers({ commit, state }) {
+      // Используем state для получения токена
+      try {
+        const response = await axios.get("http://localhost:5000/users", {
+          headers: { Authorization: `Bearer ${state.token}` }, // Используем токен из состояния
+        });
+        commit("SET_USERS", response.data);
+      } catch (error) {
+        console.error("Failed to fetch users:", error);
       }
     },
     async logout({ commit }) {
-      try {
-        await signOut(auth);
-        commit("LOGOUT");
-      } catch (error) {
-        console.error("Ошибка выхода:", error);
-      }
-    },
-    async setUser({ commit }, user) {
-      commit("SET_USER", user);
-    },
-    async checkAuth({ commit }) {
-      commit("SET_LOADING", true); // Установка состояния загрузки
-      onAuthStateChanged(auth, (user) => {
-        commit("SET_USER", user);
-        commit("SET_LOADING", false); // Сброс состояния загрузки после проверки
-      });
+      commit("LOGOUT");
     },
   },
 });

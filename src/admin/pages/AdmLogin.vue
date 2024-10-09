@@ -1,146 +1,147 @@
 <template>
-  <div>
-    <p v-if="isAuthenticated">Welcome, {{ currentUser?.email }}</p>
-    <p v-else>Please log in.</p>
-  </div>
-  <div class="login-container">
-    <h1>Admin Login</h1>
-    <form @submit.prevent="login()">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input v-model="email" type="email" id="email" required />
-      </div>
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input v-model="password" type="password" id="password" required />
-      </div>
-      <button type="submit">Login</button>
-
-      <div v-if="authError" class="error-message">
-        {{ authError }}
-      </div>
+  <div class="auth-container">
+    <h2 v-if="isRegistering">Register</h2>
+    <h2 v-else>Login</h2>
+    <form
+      @submit.prevent="isRegistering ? register() : login()"
+      class="auth-form">
+      <input
+        type="email"
+        v-model="email"
+        placeholder="Email"
+        required
+        class="auth-input" />
+      <input
+        type="password"
+        v-model="password"
+        placeholder="Password"
+        required
+        class="auth-input" />
+      <button type="submit" class="auth-button">
+        {{ isRegistering ? "Register" : "Login" }}
+      </button>
     </form>
-    <button
-      v-if="isAuthenticated"
-      @click="logout"
-      style="margin-top: 1rem; background-color: red">
-      Logout
-    </button>
+    <p @click="toggleForm" class="toggle-form">
+      {{
+        isRegistering
+          ? "Already have an account? Login"
+          : "Don't have an account? Register"
+      }}
+    </p>
   </div>
 </template>
 
 <script>
-import { ref, computed } from "vue";
-import { useStore } from "vuex";
-import { useRouter } from "vue-router";
+import { mapActions } from "vuex";
 
 export default {
-  name: "AdminLogin",
-  setup() {
-    const store = useStore();
-    const router = useRouter();
-    const email = ref("");
-    const password = ref("");
-    const isLoginMode = ref(true);
-
-    const isAuthenticated = computed(() => store.getters.isAuthenticated);
-    const authError = computed(() => store.getters.authError);
-    const currentUser = computed(() => store.getters.currentUser);
-
-    const login = async () => {
-      await store.dispatch("login", {
-        email: email.value,
-        password: password.value,
-      });
-      if (store.getters.isAuthenticated) {
-        router.push({ name: "AdmPage" });
-      } else {
-        console.error("Ошибка аутентификации");
-      }
-    };
-
-    const logout = () => {
-      store.dispatch("logout");
-    };
-
-    const toggleMode = () => {
-      isLoginMode.value = !isLoginMode.value;
-    };
-
+  data() {
     return {
-      email,
-      password,
-      isLoginMode,
-      toggleMode,
-      login,
-      logout,
-      isAuthenticated,
-      authError,
-      currentUser,
+      email: "",
+      password: "",
+      isRegistering: true,
     };
+  },
+  computed: {
+    async getUserProfile() {
+      try {
+        const response = await axios.get("http://localhost:5000/profile", {
+          headers: { Authorization: `Bearer ${this.$store.state.token}` },
+        });
+        console.log("User profile data:", response.data.user);
+      } catch (error) {
+        console.error("Error fetching user profile:", error);
+      }
+    },
+  },
+  methods: {
+    ...mapActions(["register", "login"]),
+    async register() {
+      try {
+        await this.$store.dispatch("register", {
+          email: this.email,
+          password: this.password,
+        }); 
+        alert("Registration successful!");
+      } catch (error) {
+        console.error("Registration error:", error);
+        alert("Registration failed!");
+      }
+    },
+    async login() {
+      try {
+        await this.$store.dispatch("login", {
+          email: this.email,
+          password: this.password,
+        });
+        alert("Login successful!");
+        this.$router.push("/user"); 
+      } catch (error) {
+        console.error("Login error:", error);
+        alert("Login failed!");
+      }
+    },
+    toggleForm() {
+      this.isRegistering = !this.isRegistering; 
+    },
   },
 };
 </script>
 
 <style scoped>
-.login-container {
-  width: 300px;
-  margin: 100px auto;
+.auth-container {
+  max-width: 400px;
+  margin: 50px auto;
   padding: 20px;
-  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  font-family: "Arial", sans-serif;
 }
 
-h1 {
-  text-align: center;
+.auth-form {
+  display: flex;
+  flex-direction: column;
 }
 
-.form-group {
-  margin-bottom: 15px;
-}
-
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-
-.form-group input {
-  width: 100%;
-  padding: 8px;
-  box-sizing: border-box;
-}
-
-button {
-  width: 100%;
-  padding: 10px;
-  background-color: #42b983;
-  color: white;
-  border: none;
-  cursor: pointer;
+.auth-input {
+  margin: 10px 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
   font-size: 16px;
+  transition: border-color 0.3s;
 }
 
-button:hover {
-  background-color: #359a70;
+.auth-input:focus {
+  border-color: #007bff; /* Цвет границы при фокусе */
+  outline: none;
 }
 
-.error-message {
-  margin-top: 10px;
-  color: red;
-  text-align: center;
-}
-
-p {
-  text-align: center;
-}
-
-a {
+.auth-button {
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Основной цвет кнопки */
+  color: white;
+  font-size: 16px;
   cursor: pointer;
-  color: #42b983;
+  transition: background-color 0.3s;
 }
 
-a:hover {
-  color: #359a70;
+.auth-button:hover {
+  background-color: #0056b3; /* Цвет кнопки при наведении */
+}
+
+.toggle-form {
+  text-align: center;
+  margin-top: 10px;
+  color: #007bff; /* Цвет текста переключателя */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.toggle-form:hover {
+  color: #0056b3; /* Цвет текста при наведении */
 }
 </style>
