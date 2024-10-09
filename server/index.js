@@ -8,11 +8,9 @@ require("dotenv").config();
 const app = express();
 const port = 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Database connection
 const pool = new Pool({
   host: "localhost",
   port: 5432,
@@ -21,12 +19,10 @@ const pool = new Pool({
   password: "192837465",
 });
 
-// Error logging function
 const logError = (message, error) => {
   console.error(message, error);
 };
 
-// Authentication middleware
 const authenticateToken = (req, res, next) => {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
@@ -35,12 +31,11 @@ const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
     if (err) return res.sendStatus(403);
-    req.user = user; // Save user data in req.user
+    req.user = user;
     next();
   });
 };
 
-// Routes
 app.post("/register", async (req, res) => {
   const { email, password } = req.body;
 
@@ -71,12 +66,10 @@ app.post("/feedback", async (req, res) => {
       [name, email, website, message, new Date()]
     );
 
-    res
-      .status(201)
-      .json({
-        message: "User registered successfully!",
-        feedback: result.rows[0],
-      });
+    res.status(201).json({
+      message: "User registered successfully!",
+      feedback: result.rows[0],
+    });
   } catch (error) {
     logError("Error during registration:", error);
     res
@@ -150,7 +143,16 @@ app.get("/users", authenticateToken, async (req, res) => {
   }
 });
 
-// Start server
+app.get("/feedback/list", authenticateToken, async (req, res) => {
+  try {
+    const result = await pool.query("SELECT * FROM feedback");
+    res.json(result.rows);
+  } catch (error) {
+    logError("Error fetching feedback:", error);
+    res.status(500).json({ error: "Failed to fetch feedback" });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });

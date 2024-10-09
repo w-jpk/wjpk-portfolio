@@ -45,6 +45,15 @@ const routes = [
     },
   },
   {
+    path: "/feedbackTable",
+    name: "FeedbackTable",
+    component: () => import("../admin/pages/feedbackTable.vue"),
+    meta: {
+      title: "W-jpk - Feedback Table",
+      requiresAuth: true,
+    },
+  },
+  {
     path: "/:pathMatch(.*)*",
     name: "NotFound",
     component: () => import("../views/NotFound.vue"),

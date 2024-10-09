@@ -41,6 +41,11 @@ export default {
   methods: {
     ...mapActions(["feedback"]),
     async submitFeedback() {
+      if (!this.name || !this.email || !this.website || !this.message) {
+        alert("Пожалуйста, заполните все поля.");
+        return; 
+      }
+
       try {
         await this.$store.dispatch("feedback", {
           name: this.name,

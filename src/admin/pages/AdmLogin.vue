@@ -2,9 +2,7 @@
   <div class="auth-container">
     <h2 v-if="isRegistering">Register</h2>
     <h2 v-else>Login</h2>
-    <form
-      @submit.prevent="isRegistering ? register() : login()"
-      class="auth-form">
+    <form @submit.prevent="login()" class="auth-form">
       <input
         type="email"
         v-model="email"
@@ -17,17 +15,8 @@
         placeholder="Password"
         required
         class="auth-input" />
-      <button type="submit" class="auth-button">
-        {{ isRegistering ? "Register" : "Login" }}
-      </button>
+      <button type="submit" class="auth-button">Login</button>
     </form>
-    <p @click="toggleForm" class="toggle-form">
-      {{
-        isRegistering
-          ? "Already have an account? Login"
-          : "Don't have an account? Register"
-      }}
-    </p>
   </div>
 </template>
 
@@ -39,7 +28,6 @@ export default {
     return {
       email: "",
       password: "",
-      isRegistering: true,
     };
   },
   computed: {
@@ -61,7 +49,7 @@ export default {
         await this.$store.dispatch("register", {
           email: this.email,
           password: this.password,
-        }); 
+        });
         alert("Registration successful!");
       } catch (error) {
         console.error("Registration error:", error);
@@ -75,14 +63,14 @@ export default {
           password: this.password,
         });
         alert("Login successful!");
-        this.$router.push("/user"); 
+        this.$router.push("/user");
       } catch (error) {
         console.error("Login error:", error);
         alert("Login failed!");
       }
     },
     toggleForm() {
-      this.isRegistering = !this.isRegistering; 
+      this.isRegistering = !this.isRegistering;
     },
   },
 };

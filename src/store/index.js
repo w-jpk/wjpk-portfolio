@@ -6,7 +6,7 @@ export default createStore({
     token: localStorage.getItem("token") || "",
     user: null,
     users: [],
-    feedback: null,
+    feedback: [],
     name: "W-JPK",
     exps: [
       {
@@ -158,16 +158,30 @@ export default createStore({
       }
     },
     async fetchUsers({ commit, state }) {
-      // Используем state для получения токена
       try {
         const response = await axios.get("http://localhost:5000/users", {
-          headers: { Authorization: `Bearer ${state.token}` }, // Используем токен из состояния
+          headers: { Authorization: `Bearer ${state.token}` },
         });
         commit("SET_USERS", response.data);
       } catch (error) {
         console.error("Failed to fetch users:", error);
       }
     },
+
+    async fetchFeedback({ commit, state }) {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/feedback/list",
+          {
+            headers: { Authorization: `Bearer ${state.token}` },
+          }
+        );
+        commit("SET_FEEDBACK", response.data);
+      } catch (error) {
+        console.error("Failed to fetch feedback:", error);
+      }
+    },
+
     async logout({ commit }) {
       commit("LOGOUT");
     },
