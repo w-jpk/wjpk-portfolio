@@ -7,6 +7,7 @@ export default createStore({
     user: null,
     users: [],
     feedback: [],
+    projects: [],
     name: "W-JPK",
     exps: [
       {
@@ -83,6 +84,7 @@ export default createStore({
     user: (state) => state.user,
     users: (state) => state.users,
     feedback: (state) => state.feedback,
+    projects: (state) => state.projects,
   },
   mutations: {
     SET_TOKEN(state, token) {
@@ -105,6 +107,9 @@ export default createStore({
     SET_FEEDBACK(state, feedback) {
       state.feedback = feedback;
     },
+    SET_PROJECTS(state, projects) {
+      state.projects = projects;
+    },
   },
   actions: {
     async register({ commit }, { email, password }) {
@@ -125,6 +130,37 @@ export default createStore({
         });
       } catch (error) {
         console.error("Feedback submission failed:", error);
+        throw error;
+      }
+    },
+    async addProject(
+      { commit },
+      {
+        projectname,
+        creationtime,
+        projecttag,
+        clientname,
+        clientservices,
+        clientwebsite,
+        toolstechnologies,
+        description,
+        imagefiles,
+      }
+    ) {
+      try {
+        await axios.post("http://localhost:5000/add/project", {
+          projectname,
+          creationtime,
+          projecttag,
+          clientname,
+          clientservices,
+          clientwebsite,
+          toolstechnologies,
+          description,
+          imagefiles,
+        });
+      } catch (error) {
+        console.error("Project submission failed:", error);
         throw error;
       }
     },

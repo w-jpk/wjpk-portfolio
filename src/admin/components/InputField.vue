@@ -3,11 +3,11 @@
     <component
       :is="textarea ? 'textarea' : 'input'"
       :id="id"
-      :value="value"
+      :value="modelValue"
       :placeholder="placeholder"
       :required="required"
       :maxlength="maxlength"
-      @input="$emit('update:modelValue', $event)"
+      @input="$emit('update:modelValue', $event.target.value)"
       class="input__field" />
     <label :for="id" class="input__label">{{ placeholder }}</label>
   </div>

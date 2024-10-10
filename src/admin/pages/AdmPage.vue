@@ -9,12 +9,12 @@
         <div class="inline-fields">
           <InputField
             id="projectName"
-            v-model="form.projectName"
+            v-model="form.projectname"
             placeholder="Project Name"
             required />
           <InputField
             id="projectTag"
-            v-model="form.projectTag"
+            v-model="form.projecttag"
             placeholder="Project Tag"
             required
             maxlength="50" />
@@ -24,23 +24,23 @@
         <h2>Client Information</h2>
         <InputField
           id="clientName"
-          v-model="form.clientName"
+          v-model="form.clientname"
           placeholder="Client Name"
           required />
         <InputField
           id="clientServices"
-          v-model="form.clientServices"
+          v-model="form.clientservices"
           placeholder="Client Services"
           required />
         <InputField
           id="clientWebsite"
-          v-model="form.clientWebsite"
+          v-model="form.clientwebsite"
           placeholder="Client Website"
           required />
       </div>
       <InputField
         id="toolsTechnologies"
-        v-model="form.toolsTechnologies"
+        v-model="form.toolstechnologies"
         placeholder="Tools & Technologies"
         required
         maxlength="200" />
@@ -68,7 +68,7 @@
           <img :src="imagePreview" alt="Image preview" />
         </div>
       </div>
-      <button class="submit-button" type="submit">Add Project</button>
+      <button class="submit-button" @click="submitForm">Add Project</button>
     </div>
   </div>
 </template>
@@ -76,20 +76,22 @@
 <script>
 import axios from "axios";
 import InputField from "../components/InputField.vue";
+import { mapActions } from "vuex";
 
 export default {
+  name: "AdmPage",
   data() {
     return {
       form: {
-        projectName: "",
-        projectTag: "",
-        clientName: "",
-        clientServices: "",
-        clientWebsite: "",
-        toolsTechnologies: "",
+        projectname: "",
+        projecttag: "",
+        clientname: "",
+        clientservices: "",
+        clientwebsite: "",
+        toolstechnologies: "",
         description: "",
-        creationTime: new Date().toISOString(),
-        imageFiles: [],
+        creationtime: new Date().toISOString(),
+        imagefiles: "",
       },
       imagePreview: null,
     };
@@ -104,9 +106,10 @@ export default {
     },
   },
   methods: {
+    ...mapActions(["addProject"]),
     async submitForm() {
       try {
-        await axios.post("http://localhost:3000/api/projects", this.form);
+        await axios.post("http://localhost:5000/add/project", this.form);
         alert("Project added successfully!");
       } catch (error) {
         console.error("There was an error adding the project:", error);
@@ -121,7 +124,7 @@ export default {
     uploadFiles(files) {
       if (files.length) {
         const fileArray = Array.from(files);
-        this.form.imageFiles = fileArray.map((file) => file.name);
+        this.form.imagefiles = fileArray.map((file) => file.name);
         this.imagePreview = URL.createObjectURL(fileArray[0]);
       }
     },

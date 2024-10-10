@@ -65,13 +65,52 @@ app.post("/feedback", async (req, res) => {
       `INSERT INTO feedback (name, email, website, message, created_at) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
       [name, email, website, message, new Date()]
     );
-
     res.status(201).json({
-      message: "User registered successfully!",
+      message: "Feedback sent successfully!",
       feedback: result.rows[0],
     });
   } catch (error) {
-    logError("Error during registration:", error);
+    logError("Error during feedback:", error);
+    res
+      .status(500)
+      .json({ error: "Internal Server Error", details: error.message });
+  }
+});
+
+app.post("/add/project", async (req, res) => {
+  const {
+    projectname,
+    creationtime,
+    projecttag,
+    clientname,
+    clientservices,
+    clientwebsite,
+    toolstechnologies,
+    description,
+    imagefiles,
+  } = req.body;
+
+  try {
+    const result = await pool.query(
+      `INSERT INTO projects (projectname, creationtime, projecttag, clientname, clientservices, clientwebsite, toolstechnologies, description, imagefiles) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *`,
+      [
+        projectname,
+        creationtime,
+        projecttag,
+        clientname,
+        clientservices,
+        clientwebsite,
+        toolstechnologies,
+        description,
+        imagefiles,
+      ]
+    );
+    res.status(201).json({
+      message: "Project added successfully!",
+      project: result.rows[0],
+    });
+  } catch (error) {
+    logError("Error during project:", error);
     res
       .status(500)
       .json({ error: "Internal Server Error", details: error.message });
