@@ -99,7 +99,7 @@ export default {
   computed: {
     formattedDate() {
       const options = { month: "long", day: "numeric", year: "numeric" };
-      return new Date(this.form.creationTime).toLocaleDateString(
+      return new Date(this.form.creationtime).toLocaleDateString(
         "en-US",
         options
       );
