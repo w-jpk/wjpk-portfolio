@@ -30,18 +30,6 @@ export default {
       password: "",
     };
   },
-  computed: {
-    async getUserProfile() {
-      try {
-        const response = await axios.get("http://localhost:5000/profile", {
-          headers: { Authorization: `Bearer ${this.$store.state.token}` },
-        });
-        console.log("User profile data:", response.data.user);
-      } catch (error) {
-        console.error("Error fetching user profile:", error);
-      }
-    },
-  },
   methods: {
     ...mapActions(["register", "login"]),
     async register() {
@@ -102,7 +90,7 @@ export default {
 }
 
 .auth-input:focus {
-  border-color: #007bff; /* Цвет границы при фокусе */
+  border-color: #007bff;
   outline: none;
 }
 
@@ -110,7 +98,7 @@ export default {
   padding: 12px;
   border: none;
   border-radius: 4px;
-  background-color: #007bff; /* Основной цвет кнопки */
+  background-color: #007bff;
   color: white;
   font-size: 16px;
   cursor: pointer;
@@ -118,18 +106,19 @@ export default {
 }
 
 .auth-button:hover {
-  background-color: #0056b3; /* Цвет кнопки при наведении */
+  background-color: #0056b3;
 }
 
 .toggle-form {
   text-align: center;
   margin-top: 10px;
-  color: #007bff; /* Цвет текста переключателя */
+  color: #007bff;
   cursor: pointer;
   text-decoration: underline;
 }
 
 .toggle-form:hover {
-  color: #0056b3; /* Цвет текста при наведении */
+  color: #0056b3;
 }
 </style>
+

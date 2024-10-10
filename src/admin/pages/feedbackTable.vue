@@ -62,10 +62,8 @@ export default {
       return Math.ceil(this.totalMembers / this.itemsOnPage);
     },
     paginatedMembers() {
-      // Сначала сортируем записи по убыванию ID
       const sortedFeedback = [...this.feedback].sort((a, b) => b.id - a.id);
 
-      // Определяем начальный индекс и получаем нужные элементы
       const start = (this.currentPage - 1) * this.itemsOnPage;
       return sortedFeedback.slice(start, start + this.itemsOnPage);
     },
@@ -88,27 +86,6 @@ export default {
 </script>
 
 <style scoped>
-:root {
-  --background: #ebecf0;
-  --table-background: #ffffff;
-  --primary: #101824;
-  --gray: #a0a7b1;
-  --odd-row: #f6f9ff;
-  --gray-background: #edeef1;
-  --gray-mid: #f1f2f6;
-}
-
-body {
-  font-family: sans-serif;
-  margin: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  padding: 1rem;
-  background: var(--background);
-}
-
 .table-widget {
   border-radius: 1rem;
   background: var(--table-background);
@@ -174,93 +151,6 @@ body {
   align-items: center;
   margin-left: 1rem;
   border-radius: 0.5rem;
-}
-
-.team-member-profile {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-}
-
-.profile-info {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.profile-info__name {
-  display: flex;
-  align-items: center;
-  font-weight: 700;
-  white-space: nowrap;
-}
-
-.team-member-profile img {
-  width: 3.125rem;
-  height: 3.125rem;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.status {
-  border-radius: 0.5rem;
-  padding: 0.5rem;
-  font-weight: 700;
-}
-
-.status--active {
-  background: #eafef3;
-  color: #2ecc71;
-}
-
-.status--inactive {
-  background: #fff6e5;
-  color: #f4bd50;
-}
-
-.status--offline {
-  background: var(--gray-mid);
-  color: var(--gray);
-}
-
-.tags {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.tag {
-  padding: 0.5rem;
-  background: var(--gray-mid);
-  border-radius: 0.5rem;
-  font-weight: 700;
-}
-
-.tag::first-letter {
-  text-transform: uppercase;
-}
-
-.tag--design {
-  background: #f4efff;
-  color: #9a84da;
-}
-
-.tag--QA {
-  color: #df8fa8;
-  background: #fbdde7;
-}
-
-.tag--dev {
-  background: #eaf2ff;
-  color: #739fdc;
-}
-
-.tag--marketing {
-  background: #fff6e5;
-  color: #f4bd50;
-}
-
-.table-widget {
-  min-height: 5rem;
 }
 
 .pagination {

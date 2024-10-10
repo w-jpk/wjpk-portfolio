@@ -4,7 +4,6 @@
 </template>
 
 <script>
-import NavBar from "@/views/NavBar.vue";
 import "@fortawesome/fontawesome-free/css/all.css";
 import "@fortawesome/fontawesome-free/js/all.js";
 import ButtonTop from "./components/ButtonTop.vue";
@@ -12,7 +11,6 @@ import ButtonTop from "./components/ButtonTop.vue";
 export default {
   name: "App",
   components: {
-    NavBar,
     ButtonTop,
   },
 };

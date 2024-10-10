@@ -52,25 +52,21 @@ import { mapGetters } from "vuex";
 
 export default {
   computed: {
-    ...mapGetters(["user", "users"]), // Получаем доступ к геттеру user из Vuex
+    ...mapGetters(["user", "users"]),
   },
   mounted() {
     if (!this.user) {
       this.$store.dispatch("fetchUser");
     }
-    console.log("User data:", this.user);
     this.loadUsers();
-    if (this.user && this.user.created_at) {
-      console.log("User created_at:", this.user.created_at); // Дополнительное логирование
-    }
   },
   methods: {
     loadUsers() {
-      this.$store.dispatch("fetchUsers"); // Делаем запрос на получение списка пользователей
+      this.$store.dispatch("fetchUsers");
     },
     logoutUser() {
-      this.$store.dispatch("logout"); // Вызываем action logout
-      this.$router.push("/adm-login"); // Перенаправляем на страницу логина
+      this.$store.dispatch("logout");
+      this.$router.push("/adm-login");
     },
   },
 };

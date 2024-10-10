@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Кнопка "Back to Top" -->
     <button v-if="isVisible" @click="scrollToTop" class="back-to-top">
       <font-awesome-icon :icon="['fas', 'chevron-up']" />
     </button>

@@ -44,20 +44,18 @@ export default {
     Details,
   },
   mounted() {
-    this.observeSections(); // Вызываем метод отслеживания элементов при монтировании
+    this.observeSections();
   },
   methods: {
     observeSections() {
       const options = {
-        root: null, // Отслеживание в пределах всего окна
-        threshold: 0.1, // Срабатывание при видимости 10% элемента
+        root: null,
+        threshold: 0.1,
       };
       const observer = new IntersectionObserver(this.handleIntersect, options);
 
-      // Находим все элементы, которые должны наблюдаться
       const items = this.$el.querySelectorAll(".observer-item");
 
-      // Применяем наблюдение ко всем элементам
       items.forEach((item) => observer.observe(item));
     },
     handleIntersect(entries) {

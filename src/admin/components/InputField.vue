@@ -1,4 +1,3 @@
-<!-- components/InputField.vue -->
 <template>
   <div class="input__wrapper">
     <component
@@ -18,7 +17,7 @@
 export default {
   props: {
     id: String,
-    modelValue: String, // Используйте modelValue для v-model
+    modelValue: String,
     placeholder: String,
     required: Boolean,
     maxlength: Number,
@@ -28,7 +27,6 @@ export default {
 </script>
 
 <style scoped>
-/* Стили остаются прежними */
 .input__wrapper {
   position: relative;
   padding: 1rem 0 0;

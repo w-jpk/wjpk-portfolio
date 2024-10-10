@@ -5,8 +5,6 @@
       <div class="input__wrapper">
         <label class="input__label">Creation Date: {{ formattedDate }}</label>
       </div>
-
-      <!-- Проектные поля -->
       <div class="project-fields">
         <div class="inline-fields">
           <InputField
@@ -22,8 +20,6 @@
             maxlength="50" />
         </div>
       </div>
-
-      <!-- Информация о клиенте -->
       <div class="client-info">
         <h2>Client Information</h2>
         <InputField
@@ -42,14 +38,12 @@
           placeholder="Client Website"
           required />
       </div>
-
       <InputField
         id="toolsTechnologies"
         v-model="form.toolsTechnologies"
         placeholder="Tools & Technologies"
         required
         maxlength="200" />
-
       <InputField
         id="description"
         v-model="form.description"
@@ -57,10 +51,7 @@
         required
         textarea />
     </div>
-
-    <!-- Описание и Dropzone справа -->
     <div class="description-dropzone">
-      <!-- Dropzone для загрузки изображений -->
       <div class="dropzone" @dragover.prevent @drop.prevent="handleDrop">
         <p v-if="!imagePreview">
           Drag & drop your images here or click to upload
@@ -77,8 +68,6 @@
           <img :src="imagePreview" alt="Image preview" />
         </div>
       </div>
-
-      <!-- Кнопка отправки формы -->
       <button class="submit-button" type="submit">Add Project</button>
     </div>
   </div>
@@ -99,7 +88,7 @@ export default {
         clientWebsite: "",
         toolsTechnologies: "",
         description: "",
-        creationTime: new Date().toISOString(), // Устанавливаем сегодняшнюю дату в ISO формате
+        creationTime: new Date().toISOString(),
         imageFiles: [],
       },
       imagePreview: null,
@@ -157,7 +146,7 @@ export default {
 .form-section {
   display: flex;
   flex-direction: column;
-  width: 60%; /* Устанавливаем ширину для левой части */
+  width: 60%;
 }
 
 h1 {
@@ -175,27 +164,18 @@ h1 {
 
 .inline-fields {
   display: flex;
-  gap: 15px; /* Отступ между полями */
+  gap: 15px;
 }
 
 .client-info {
   border: 1px solid #ccc;
   border-radius: 8px;
   padding: 15px;
-  margin-top: 1rem; /* Отступ сверху */
+  margin-top: 1rem;
 }
 
 .client-info h2 {
-  margin: 0 0 10px; /* Отступ снизу заголовка */
-}
-
-.description-dropzone {
-  width: 50%; /* Устанавливаем ширину для правой части */
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center;
-  margin-left: 20px; /* Отступ слева от правой части */
+  margin: 0 0 10px;
 }
 
 button {
@@ -205,11 +185,21 @@ button {
   color: white;
   cursor: pointer;
   font-size: 16px;
-  margin-top: 2rem; /* Отступ сверху для кнопки */
+  margin-top: 2rem;
 }
 
 button:hover {
   background-color: #0056b3;
+}
+
+.description-dropzone {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 20px;
+  height: 100vh;
 }
 
 .dropzone {
@@ -218,7 +208,12 @@ button:hover {
   text-align: center;
   cursor: pointer;
   position: relative;
-  margin-top: 1rem; /* Отступ сверху для dropzone */
+  margin-top: 1rem;
+  width: 80%;
+}
+
+.submit-button {
+  margin-top: 5rem;
 }
 
 .image-preview {

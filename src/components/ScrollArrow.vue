@@ -26,7 +26,6 @@ export default {
   },
   watch: {
     isVisible(newVal) {
-      // Отслеживание изменения видимости стрелки
       if (newVal) {
         this.fadeIn();
       } else {

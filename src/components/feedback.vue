@@ -43,7 +43,7 @@ export default {
     async submitFeedback() {
       if (!this.name || !this.email || !this.website || !this.message) {
         alert("Пожалуйста, заполните все поля.");
-        return; 
+        return;
       }
 
       try {
@@ -106,7 +106,7 @@ export default {
 }
 
 .char-count.warn {
-  color: red; /* Подсветка красным при превышении 490 символов */
+  color: red;
 }
 
 button {

@@ -1,6 +1,5 @@
 <template>
   <div>
-    <!-- Заголовок проекта и мета-информация -->
     <p class="project-title">
       {{ singleProjectHeader.singleProjectTitle }}
     </p>
