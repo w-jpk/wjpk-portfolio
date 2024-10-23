@@ -40,7 +40,7 @@ export default createStore({
       {
         id: 1,
         title: "Сварка Аргоном | Оренбург",
-        date: "19.10.2024",
+        date: "20.10.2024",
         tag: "Frontend",
         image: [
           {
@@ -58,11 +58,11 @@ export default createStore({
         ],
         clientname: "Сварка Аргоном",
         clientservices: "Оренбург",
-        clientwebsite: "https://example.com",
+        clientwebsite: "https://welding-orenburg.vercel.app",
         toolstechnologies: "Vue.js, SCSS, TypeScript",
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
-        liveDemoLink: "https://welding-orenburg.vercel.app/",
+        liveDemoLink: "https://welding-orenburg.vercel.app",
         githubLink: "https://github.com/w-jpk/welding-orenburg",
       },
       {
@@ -86,11 +86,11 @@ export default createStore({
         ],
         clientname: "Сварка Аргоном",
         clientservices: "Оренбург",
-        clientwebsite: "https://welding-orenburg.vercel.app/",
+        clientwebsite: "https://welding-orenburg.vercel.app",
         toolstechnologies: "Vue.js, SCSS, TypeScript",
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
-        liveDemoLink: "https://welding-orenburg.vercel.app/",
+        liveDemoLink: "https://welding-orenburg.vercel.app",
         githubLink: "https://github.com/w-jpk/welding-orenburg",
       },
       {
@@ -114,11 +114,11 @@ export default createStore({
         ],
         clientname: "Сварка Аргоном",
         clientservices: "Оренбург",
-        clientwebsite: "https://example.com",
+        clientwebsite: "https://welding-orenburg.vercel.app",
         toolstechnologies: "Vue.js, SCSS, TypeScript",
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
-        liveDemoLink: "https://welding-orenburg.vercel.app/",
+        liveDemoLink: "https://welding-orenburg.vercel.app",
         githubLink: "https://github.com/w-jpk/welding-orenburg",
       },
     ],

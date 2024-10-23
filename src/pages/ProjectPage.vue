@@ -1,6 +1,18 @@
 <template>
-  <NavBar />
   <div class="single-project">
+    <button class="back-button" @click="goBack">
+      <div class="back">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          class="back-icon">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+        </svg>
+        Назад
+      </div>
+    </button>
+
     <ProjectHeader :singleProjectHeader="singleProjectHeader" />
     <ProjectGallary :projectImages="projectImages" />
     <ProjectInfo :projectInfo="projectInfo" />
@@ -23,7 +35,7 @@ export default {
   },
   computed: {
     ...mapState({
-      projects: (state) => state.prod_v2, // Используем state.prod_v2
+      projects: (state) => state.prod_v2,
     }),
     project() {
       const projectId = this.$route.params.id;
@@ -44,28 +56,36 @@ export default {
     projectInfo() {
       return this.project
         ? {
-            clientHeading: "About Client",
+            clientHeading: "О клиенте",
             companyInfos: [
-              { id: 1, title: "Name", details: this.project.clientname },
+              { title: "Наименование", details: this.project.clientname },
               {
-                id: 2,
-                title: "Services",
+                title: "Услуги",
                 details: this.project.clientservices,
               },
-              { id: 3, title: "Website", details: this.project.clientwebsite },
+              { title: "Веб-сайт", details: this.project.clientwebsite },
             ],
-            objectivesHeading: "Objective",
-            objectivesDetails: this.project.description,
             technologies: [
               {
-                title: "Tools & Technologies",
+                title: "Инструменты и технологии",
                 techs: this.project.toolstechnologies
                   .split(", ")
                   .map((tech) => tech.trim()),
               },
             ],
+            projectDetailsHeading: "Описание",
+            projectDetails: [
+              {
+                details: this.project.description,
+              },
+            ],
           }
         : {};
+    },
+  },
+  methods: {
+    goBack() {
+      this.$router.go(-1);
     },
   },
 };
@@ -74,6 +94,41 @@ export default {
 <style scoped>
 .single-project {
   width: 70%;
-  margin: 2.5rem auto;
+  margin: 1rem auto;
+  position: relative;
+}
+
+.back-button {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100px;
+  height: 100vh;
+  display: flex;
+  align-items: start;
+  padding-left: 10px;
+  background-color: transparent;
+  border: none;
+  color: #a5a5a5;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.back {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.back-button:hover {
+  background-color: #e0e0e0;
+  color: #3e3e3e;
+}
+
+.back-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 2px;
 }
 </style>

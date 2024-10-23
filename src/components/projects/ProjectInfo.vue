@@ -10,6 +10,7 @@
             class="company-info-item">
             <span>{{ info.title }}: </span>
             <a
+              v-if="isValidUrl(info.details)"
               :href="info.details"
               target="_blank"
               :class="[
@@ -19,13 +20,9 @@
               aria-label="Project Website">
               {{ info.details }}
             </a>
+            <span v-else>{{ info.details }}</span>
           </li>
         </ul>
-      </div>
-
-      <div class="section-item">
-        <p class="section-title">{{ projectInfo.objectivesHeading }}</p>
-        <p class="section-text">{{ projectInfo.objectivesDetails }}</p>
       </div>
 
       <div class="section-item">
@@ -51,6 +48,12 @@
 <script>
 export default {
   props: ["projectInfo"],
+  methods: {
+    isValidUrl(url) {
+      const regex = /^(http|https):\/\/[^ "]+$/;
+      return regex.test(url);
+    },
+  },
 };
 </script>
 
@@ -58,6 +61,11 @@ export default {
 .container {
   display: block;
   margin-top: 3.5rem;
+  cursor: default;
+}
+
+a {
+  text-decoration: none;
 }
 
 @media (min-width: 640px) {

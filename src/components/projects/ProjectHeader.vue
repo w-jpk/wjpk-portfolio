@@ -35,7 +35,7 @@ p {
   font-weight: bold;
   text-align: left;
   font-size: 1.875rem;
-  margin-top: 3.5rem;
+  /* margin-top: 1rem; */
   margin-bottom: 1.75rem;
   color: #1a202c;
 }
@@ -43,7 +43,6 @@ p {
 @media (min-width: 640px) {
   .project-title {
     font-size: 2.25rem;
-    margin-top: 5rem;
   }
 }
 
