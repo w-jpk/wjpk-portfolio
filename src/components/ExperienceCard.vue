@@ -1,9 +1,11 @@
 <template>
   <div class="grid-card">
-    <i>
-      <font-awesome-icon :icon="icon" />
-    </i>
-    <span>{{ title }}</span>
+    <div class="grid-card-info">
+      <i>
+        <font-awesome-icon :icon="icon" />
+      </i>
+      <span>{{ title }}</span>
+    </div>
     <h3>{{ years }}</h3>
     <p>{{ description }}</p>
   </div>
@@ -38,17 +40,28 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .grid-card {
   border: 2px solid black;
   border-radius: 3rem;
-  padding: 3rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: baseline;
   justify-content: left;
   cursor: pointer;
   transition: 0.2s ease-in-out;
+}
+
+.grid-card-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.grid-card-info:hover {
+  color: white;
 }
 
 .grid-card:hover {
@@ -59,7 +72,6 @@ export default {
 
 .grid-card i {
   font-size: 1.5rem;
-  margin-bottom: 1rem;
 }
 
 .grid-card span {
@@ -68,5 +80,10 @@ export default {
   background: linear-gradient(to right, rgb(0, 157, 255), rgb(255, 0, 255));
   background-clip: text;
   color: transparent;
+}
+
+.grid-card p {
+  margin-top: 0.5rem;
+  text-align: justify;
 }
 </style>

@@ -25,10 +25,10 @@ export default {
 
 section {
   padding-top: 4vh;
-  height: 96vh;
+  /* height: 96vh; */
   margin: 0 10rem;
   box-sizing: border-box;
-  min-height: fit-content;
+  min-height: 96vh;
 }
 
 .section-container {

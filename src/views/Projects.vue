@@ -1,10 +1,10 @@
 <template>
   <section id="projects" ref="projects" class="projects-section">
-    <Title title="Projects" subtitle="Browse My Recent" />
+    <Title title="Проекты" />
 
     <div class="projects-grid observer-item">
       <ProjectCard
-        v-for="(project, index) in $store.state.projects"
+        v-for="(project, index) in $store.state.prod_v2"
         :key="index"
         :project="project"
         class="observer-item" />

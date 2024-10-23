@@ -1,6 +1,6 @@
 <template>
   <section id="about" ref="about" class="about-section">
-    <Title title="About Me" subtitle="Get To Know More" />
+    <Title title="Обо мне" />
 
     <div class="section-container">
       <div class="pic-container observer-item">
@@ -23,10 +23,9 @@
 
         <div class="text-container observer-item">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Beatae
-            corporis natus suscipit, aut quia impedit soluta assumenda modi
-            laborum laboriosam ut odit accusamus! Porro id, vero provident
-            architecto ratione nam!
+            Ответственный и мотивированный начинающий разработчик, стремящийся
+            развиваться в области Front-End разработки. Интересуюсь современными
+            веб-технологиями и готов к решению новых задач.
           </p>
         </div>
       </div>

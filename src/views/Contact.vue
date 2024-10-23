@@ -1,6 +1,6 @@
 <template>
   <section id="contact">
-    <Title title="Contact Me" subtitle="Get in Touch" />
+    <Title title="Контакты" />
     <div class="contact-items">
       <Feedback />
       <div class="contact-info-upper-container">

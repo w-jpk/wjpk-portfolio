@@ -1,13 +1,13 @@
 <template>
   <div class="project-card">
     <div @click="handleHover">
-      <img :src="project.image" :alt="project.title" />
+      <img :src="project.image[0].url" :alt="project.title" />
       <h3>{{ project.title }}</h3>
       <p>{{ project.description }}</p>
     </div>
     <div class="btn-group">
-      <a :href="project.liveDemoLink" class="btn" target="_blank">Live Demo</a>
-      <a :href="project.githubLink" class="btn" target="_blank">Github Repo</a>
+      <a :href="project.liveDemoLink" class="btn" target="_blank">Demo</a>
+      <a :href="project.githubLink" class="btn" target="_blank">Github</a>
     </div>
   </div>
 </template>
@@ -53,13 +53,16 @@ export default {
 
 .project-card img {
   width: 100%;
-  max-width: 250px;
+  max-width: 500px;
+  height: 100%;
+  max-height: auto;
   border-radius: 1rem;
 }
 
 .btn-group {
   display: flex;
   gap: 1rem;
+  margin-top: 5rem;
 }
 
 .btn {

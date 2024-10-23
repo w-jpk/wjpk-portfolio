@@ -10,7 +10,7 @@
       <p class="profile__subtitle">Hello, I'm</p>
       <h1 class="profile__title">{{ $store.state.name }}</h1>
       <p class="profile__role">Frontend Developer</p>
-      <Btn :downloadPdf="downloadPdf" name="Download CV" />
+      <Btn :downloadPdf="downloadPdf" name="Резюме" />
       <div class="socials-container">
         <a
           href="https://t.me/wjpk_bot"
@@ -60,8 +60,8 @@ export default {
   methods: {
     downloadPdf() {
       const link = document.createElement("a");
-      link.href = "/cv.pdf";
-      link.download = "cv.pdf";
+      link.href = "/Гизбрехт Юлиан Александрович.pdf";
+      link.download = "Гизбрехт Юлиан Александрович.pdf";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
@@ -91,7 +91,7 @@ export default {
   justify-content: center;
   align-items: center;
   gap: 5rem;
-  height: 87vh;
+  min-height: 87vh;
   position: relative;
 }
 

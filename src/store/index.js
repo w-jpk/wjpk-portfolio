@@ -12,35 +12,119 @@ export default createStore({
     exps: [
       {
         icon: ["fas", "code"],
-        title: "Frontend Development",
-        years: "1.5 Years",
-        description:
-          "Working with HTML, CSS, and JavaScript to build interactive UI components.",
+        title: "HTML & CSS",
+        years: "4 месяца",
+        description: "Основы верстки и создания адаптивных интерфейсов.",
       },
       {
-        icon: ["fas", "database"],
-        title: "Backend Development",
-        years: "3 Years",
+        icon: ["fab", "js"],
+        title: "JavaScript",
+        years: "4 месяца",
         description:
-          "Experience in developing APIs using Node.js and working with SQL databases.",
+          "Базовые навыки работы с языком программирования для интерактивных элементов на сайте.",
       },
       {
-        icon: ["fas", "project-diagram"],
-        title: "Project Management",
-        years: "1.5 Years",
-        description:
-          "Managing multiple projects and teams to ensure successful project deliveries.",
+        icon: ["fab", "vuejs"],
+        title: "Vue.js",
+        years: "4 месяца",
+        description: "Создание компонентов, управление состоянием приложения.",
       },
       {
-        icon: ["fas", "laptop-code"],
-        title: "Full Stack Development",
-        years: "4 Years",
+        icon: ["fab", "git"],
+        title: "Git",
+        years: "4 месяца",
+        description: "Основы работы с системами контроля версий.",
+      },
+    ],
+    prod_v2: [
+      {
+        id: 1,
+        title: "Сварка Аргоном | Оренбург",
+        date: "19.10.2024",
+        tag: "Frontend",
+        image: [
+          {
+            id: 1,
+            url: require("@/assets/img/welding orenburg/project-1.png"),
+          },
+          {
+            id: 2,
+            url: require("@/assets/img/welding orenburg/project-2.png"),
+          },
+          {
+            id: 3,
+            url: require("@/assets/img/welding orenburg/project-3.png"),
+          },
+        ],
+        clientname: "Сварка Аргоном",
+        clientservices: "Оренбург",
+        clientwebsite: "https://example.com",
+        toolstechnologies: "Vue.js, SCSS, TypeScript",
         description:
-          "Experience with both frontend and backend technologies to deliver full-featured applications.",
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
+        liveDemoLink: "https://welding-orenburg.vercel.app/",
+        githubLink: "https://github.com/w-jpk/welding-orenburg",
+      },
+      {
+        id: 2,
+        title: "Сварка Аргоном | Оренбург",
+        date: "19.10.2024",
+        tag: "Frontend",
+        image: [
+          {
+            id: 1,
+            url: require("@/assets/img/welding orenburg/project-1.png"),
+          },
+          {
+            id: 2,
+            url: require("@/assets/img/welding orenburg/project-2.png"),
+          },
+          {
+            id: 3,
+            url: require("@/assets/img/welding orenburg/project-3.png"),
+          },
+        ],
+        clientname: "Сварка Аргоном",
+        clientservices: "Оренбург",
+        clientwebsite: "https://example.com",
+        toolstechnologies: "Vue.js, SCSS, TypeScript",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
+        liveDemoLink: "https://welding-orenburg.vercel.app/",
+        githubLink: "https://github.com/w-jpk/welding-orenburg",
+      },
+      {
+        id: 3,
+        title: "Сварка Аргоном | Оренбург",
+        date: "19.10.2024",
+        tag: "Frontend",
+        image: [
+          {
+            id: 1,
+            url: require("@/assets/img/welding orenburg/project-1.png"),
+          },
+          {
+            id: 2,
+            url: require("@/assets/img/welding orenburg/project-2.png"),
+          },
+          {
+            id: 3,
+            url: require("@/assets/img/welding orenburg/project-3.png"),
+          },
+        ],
+        clientname: "Сварка Аргоном",
+        clientservices: "Оренбург",
+        clientwebsite: "https://example.com",
+        toolstechnologies: "Vue.js, SCSS, TypeScript",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
+        liveDemoLink: "https://welding-orenburg.vercel.app/",
+        githubLink: "https://github.com/w-jpk/welding-orenburg",
       },
     ],
     projects: [
       {
+        id: 1,
         title: "Project One",
         image: require("@/assets/project-1.png"),
         description:
@@ -49,6 +133,7 @@ export default createStore({
         githubLink: "https://github.com/w-jpk",
       },
       {
+        id: 2,
         title: "Project Two",
         image: require("@/assets/project-2.png"),
         description:
@@ -57,6 +142,7 @@ export default createStore({
         githubLink: "https://github.com/w-jpk",
       },
       {
+        id: 3,
         title: "Project Three",
         image: require("@/assets/project-3.png"),
         description:
@@ -68,14 +154,13 @@ export default createStore({
     details: [
       {
         icon: "briefcase",
-        title: "Experience",
-        description:
-          "1 year <br /> СЛУЖБЫ МАТУШКЕ РОССИИ!!! РОССИЯ!!! РОССИЯ!!! РОССИЯ!!!",
+        title: "Опыт работы",
+        description: "Без опыта",
       },
       {
         icon: "graduation-cap",
-        title: "Education",
-        description: "21 years of education <br /> on the street",
+        title: "Образование",
+        description: "ГАПОУ 'ОКЭИ' <br /> Программист <br /> 2019-2023",
       },
     ],
   },

@@ -59,6 +59,7 @@ export default defineComponent({
 }
 
 .details__subtitle {
+  margin-top: 0.5rem;
   font-weight: 600;
   color: gray;
 }

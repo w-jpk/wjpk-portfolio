@@ -1,6 +1,6 @@
 <template>
   <section id="experience" ref="experience" class="experience-section">
-    <Title title="Experience" subtitle="Explore Me" />
+    <Title title="Навыки" />
 
     <div class="experience-details-container observer-item">
       <div class="experience-info">
