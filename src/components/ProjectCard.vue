@@ -1,6 +1,6 @@
 <template>
   <div class="project-card">
-    <div @click="handleHover">
+    <div @click="handleHover($event, project.id)">
       <img :src="project.image[0].url" :alt="project.title" />
       <h3>{{ project.title }}</h3>
       <p>{{ project.description }}</p>
@@ -21,9 +21,9 @@ export default {
     },
   },
   methods: {
-    handleHover(event) {
+    handleHover(event, id) {
       event.currentTarget.classList.toggle("hover");
-      this.$router.push({ path: `/project` });
+      this.$router.push({ path: `/project/${id}` });
     },
   },
 };
@@ -53,10 +53,10 @@ export default {
 
 .project-card img {
   width: 100%;
-  max-width: 500px;
   height: 100%;
   max-height: auto;
   border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 .btn-group {

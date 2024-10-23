@@ -68,7 +68,7 @@ export default createStore({
       {
         id: 2,
         title: "Сварка Аргоном | Оренбург",
-        date: "19.10.2024",
+        date: "20.10.2024",
         tag: "Frontend",
         image: [
           {
@@ -86,7 +86,7 @@ export default createStore({
         ],
         clientname: "Сварка Аргоном",
         clientservices: "Оренбург",
-        clientwebsite: "https://example.com",
+        clientwebsite: "https://welding-orenburg.vercel.app/",
         toolstechnologies: "Vue.js, SCSS, TypeScript",
         description:
           "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
@@ -96,7 +96,7 @@ export default createStore({
       {
         id: 3,
         title: "Сварка Аргоном | Оренбург",
-        date: "19.10.2024",
+        date: "23.10.2024",
         tag: "Frontend",
         image: [
           {

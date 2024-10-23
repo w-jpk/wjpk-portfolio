@@ -11,9 +11,9 @@ const routes = [
     },
   },
   {
-    path: "/project",
+    path: "/project/:id",
     name: "Project",
-    component: () => import("../pages/SimpleProject.vue"),
+    component: () => import("../pages/ProjectPage.vue"),
     meta: {
       title: "W-jpk - Project",
     },

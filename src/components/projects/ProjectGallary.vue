@@ -4,7 +4,7 @@
       class="project-item"
       v-for="projectImage in projectImages"
       :key="projectImage.id">
-      <img :src="projectImage.img" class="image" :alt="projectImage.title" />
+      <img :src="projectImage.url" class="image" :alt="projectImage.title" />
     </div>
   </div>
 </template>
@@ -41,8 +41,10 @@ export default {
 }
 
 .image {
-  height: auto;
+  height: 100%;
   width: 100%;
+  max-width: 500px;
+  max-height: 250px;
   border-radius: 1rem;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);

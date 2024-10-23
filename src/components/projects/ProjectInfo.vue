@@ -10,7 +10,8 @@
             class="company-info-item">
             <span>{{ info.title }}: </span>
             <a
-              href="#"
+              :href="info.details"
+              target="_blank"
               :class="[
                 'link',
                 info.title === 'Website' ? 'highlight-link' : '',
