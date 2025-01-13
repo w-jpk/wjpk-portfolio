@@ -86,7 +86,7 @@ export default {
 }
 
 .image-container {
-  max-width: 1000px;
+  max-width: auto;
   width: 100%;
   height: auto;
   display: flex;
@@ -96,7 +96,7 @@ export default {
 
 .image {
   max-width: 100%;
-  max-height: 400px;
+  max-height: 500px;
   border-radius: 1rem;
   cursor: default;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
