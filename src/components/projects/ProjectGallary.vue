@@ -1,28 +1,17 @@
 <template>
-  <div class="slider-container">
-    <div
-      class="slider"
-      :style="{ transform: 'translateX(-' + currentSlide * 100 + '%)' }">
-      <div
-        class="project-item"
-        v-for="(projectImage, index) in projectImages"
-        :key="projectImage.id"
+  <div class="slider-container" @mouseenter="stopSlider" @mouseleave="startSlider">
+    <div class="slider"
+      :style="{ transform: 'translateX(-' + currentSlide * 100 + '%)', transition: 'transform 0.5s ease' }">
+      <div class="project-item" v-for="(projectImage, index) in projectImages" :key="projectImage.id"
         :class="{ active: currentSlide === index }">
         <div class="image-container">
-          <img
-            :src="projectImage.url"
-            class="image"
-            :alt="projectImage.title" />
+          <img :src="projectImage.url" class="image" :alt="projectImage.title" loading="lazy" />
         </div>
       </div>
     </div>
     <div class="dots-container">
-      <span
-        v-for="(projectImage, index) in projectImages"
-        :key="projectImage.id"
-        class="dot"
-        :class="{ active: currentSlide === index }"
-        @click="goToSlide(index)"></span>
+      <span v-for="(projectImage, index) in projectImages" :key="projectImage.id" class="dot"
+        :class="{ active: currentSlide === index }" @click="goToSlide(index)"></span>
     </div>
   </div>
 </template>
@@ -33,19 +22,25 @@ export default {
   data() {
     return {
       currentSlide: 0,
+      sliderInterval: null,
     };
   },
   mounted() {
     this.startSlider();
   },
   beforeDestroy() {
-    clearInterval(this.sliderInterval);
+    this.stopSlider();
   },
   methods: {
     startSlider() {
+      if (this.sliderInterval) return;
       this.sliderInterval = setInterval(() => {
         this.nextSlide();
       }, 5000);
+    },
+    stopSlider() {
+      clearInterval(this.sliderInterval);
+      this.sliderInterval = null;
     },
     nextSlide() {
       this.currentSlide = (this.currentSlide + 1) % this.projectImages.length;
@@ -66,12 +61,7 @@ export default {
 
 .slider {
   display: flex;
-}
-
-.project-item.active {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.5s ease, visibility 3s;
+  transition: transform 0.5s ease;
 }
 
 .project-item {
@@ -82,11 +72,15 @@ export default {
   align-items: center;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.5s ease, visibility 1s 1s;
+  transition: opacity 0.5s ease, visibility 0.5s;
+}
+
+.project-item.active {
+  opacity: 1;
+  visibility: visible;
 }
 
 .image-container {
-  max-width: auto;
   width: 100%;
   height: auto;
   display: flex;
@@ -95,11 +89,12 @@ export default {
 }
 
 .image {
-  max-width: 100%;
+  width: 1075px;
   max-height: 500px;
   border-radius: 1rem;
   cursor: default;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
 }
 
 .dots-container {

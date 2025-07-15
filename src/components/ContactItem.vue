@@ -2,7 +2,7 @@
   <div class="contact-info-container">
     <i :class="['icon', 'contact-icon', iconClass]" aria-hidden="true"></i>
     <p class="about__text-p1">
-      <a :href="linkUrl">{{ linkText }}</a>
+      <a :href="linkUrl" target="_blank">{{ linkText }}</a>
     </p>
   </div>
 </template>

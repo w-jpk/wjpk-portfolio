@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import router from "./router";
 import store from "./store";
+import "@/assets/tailwind.css";
 
 library.add(fas);
 store.dispatch("fetchUser");

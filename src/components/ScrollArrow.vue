@@ -1,8 +1,10 @@
 <template>
-  <div
-    class="scroll-arrow"
-    :class="{ 'scroll-arrow--hidden': !isVisible }"
-    @click="scrollToNextSection"></div>
+  <div class="scrolldown" @click="scrollToNextSection">
+    <div class="chevrons">
+      <div class="chevrondown"></div>
+      <div class="chevrondown"></div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -18,33 +20,6 @@ export default {
       default: null,
     },
   },
-  data() {
-    return {
-      isVisible: false,
-      observer: null,
-    };
-  },
-  watch: {
-    isVisible(newVal) {
-      if (newVal) {
-        this.fadeIn();
-      } else {
-        this.fadeOut();
-      }
-    },
-  },
-  mounted() {
-    if (this.targetSection) {
-      this.observeParentSection();
-    } else {
-      this.observeCurrentSection();
-    }
-  },
-  beforeDestroy() {
-    if (this.observer) {
-      this.observer.disconnect();
-    }
-  },
   methods: {
     scrollToNextSection() {
       const nextSection = document.querySelector(`#${this.nextSectionId}`);
@@ -52,100 +27,102 @@ export default {
         nextSection.scrollIntoView({ behavior: "smooth" });
       }
     },
-    observeParentSection() {
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-          this.isVisible = entry.isIntersecting;
-        },
-        {
-          root: null,
-          threshold: 0.1,
-        }
-      );
-      this.observer.observe(this.targetSection);
-    },
-    observeCurrentSection() {
-      this.observer = new IntersectionObserver(
-        (entries) => {
-          const entry = entries[0];
-          this.isVisible = entry.isIntersecting;
-        },
-        {
-          root: null,
-          threshold: 0.1,
-        }
-      );
-      this.observer.observe(this.$el.parentNode);
-    },
-    fadeIn() {
-      const arrow = this.$el;
-      arrow.style.transition = "opacity 0.5s ease-in-out";
-      arrow.style.opacity = 1;
-    },
-    fadeOut() {
-      const arrow = this.$el;
-      arrow.style.transition = "opacity 0.5s ease-in-out";
-      arrow.style.opacity = 0;
-    },
   },
 };
 </script>
 
 <style scoped>
-.scroll-arrow {
+.scrolldown {
+  --color: black;
+  --sizeX: 30px;
+  --sizeY: 50px;
   position: absolute;
   bottom: 30px;
   left: 50%;
-  transform: translateX(-50%);
-  width: 50px;
-  height: 50px;
-  border: 2px solid black;
-  border-radius: 50%;
+  width: var(--sizeX);
+  height: var(--sizeY);
+  margin-left: var(sizeX / 2);
+  border: calc(var(--sizeX) / 10) solid var(--color);
+  border-radius: 50px;
+  box-sizing: border-box;
+  margin-bottom: 16px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-  opacity: 0;
-  z-index: 1;
-  animation: bounce 2s infinite;
 }
 
-.scroll-arrow::before {
+.scrolldown::before {
   content: "";
-  width: 12px;
-  height: 12px;
-  border-right: 2px solid black;
-  border-bottom: 2px solid black;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  margin-left: -3px;
+  background-color: var(--color);
+  border-radius: 100%;
+  animation: scrolldown-anim 2s infinite;
+  box-sizing: border-box;
+  box-shadow: 0px -5px 3px 1px #00000066;
+}
+
+@keyframes scrolldown-anim {
+  0% {
+    opacity: 0;
+    height: 6px;
+  }
+
+  40% {
+    opacity: 1;
+    height: 10px;
+  }
+
+  80% {
+    transform: translate(0, 20px);
+    height: 10px;
+    opacity: 0;
+  }
+
+  100% {
+    height: 3px;
+    opacity: 0;
+  }
+}
+
+.chevrons {
+  padding: 6px 0 0 0;
+  margin-left: -3px;
+  margin-top: 48px;
+  width: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chevrondown {
+  margin-top: -6px;
+  position: relative;
+  border: solid var(--color);
+  border-width: 0 3px 3px 0;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
   transform: rotate(45deg);
 }
 
-.scroll-arrow--hidden {
-  pointer-events: none;
+.chevrondown:nth-child(odd) {
+  animation: pulse54012 500ms ease infinite alternate;
 }
 
-.scroll-arrow:hover {
-  transform: translateX(-50%) translateY(-5px);
+.chevrondown:nth-child(even) {
+  animation: pulse54012 500ms ease infinite alternate 250ms;
 }
 
-.scroll-arrow:active {
-  transform: translateX(-50%) translateY(0);
-}
-
-@keyframes bounce {
-  0%,
-  20%,
-  50%,
-  80%,
-  100% {
-    transform: translateY(0);
+@keyframes pulse54012 {
+  from {
+    opacity: 0;
   }
-  40% {
-    transform: translateY(-10px);
-  }
-  60% {
-    transform: translateY(-5px);
+
+  to {
+    opacity: 0.5;
   }
 }
 </style>

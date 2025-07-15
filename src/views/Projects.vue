@@ -1,12 +1,8 @@
 <template>
-  <section id="projects" ref="projects" class="projects-section">
+  <section id="projects" ref="projects" class="projects-section py-8 md:py-16 px-4 md:px-20">
     <Title title="Проекты" />
-
-    <div class="projects-grid observer-item">
-      <ProjectCard
-        v-for="(project, index) in $store.state.prod_v2"
-        :key="index"
-        :project="project"
+    <div class="projects-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 observer-item mt-8">
+      <cardProject v-for="(project, index) in $store.state.prod_v2" :key="index" :project="project"
         class="observer-item" />
     </div>
   </section>
@@ -14,12 +10,12 @@
 
 <script>
 import Title from "@/components/Title.vue";
-import ProjectCard from "@/components/ProjectCard.vue";
+import cardProject from "@/components/cardProject.vue";
 
 export default {
   components: {
     Title,
-    ProjectCard,
+    cardProject
   },
   mounted() {
     this.observeProjectsSection();
@@ -52,12 +48,6 @@ export default {
 </script>
 
 <style scoped>
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-}
-
 .observer-item {
   opacity: 0;
   transform: translateY(20px);

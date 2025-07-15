@@ -13,27 +13,32 @@ export default createStore({
       {
         icon: ["fas", "code"],
         title: "HTML & CSS",
-        years: "4 месяца",
-        description: "Основы верстки и создания адаптивных интерфейсов.",
+        years: "3 года",
+        description: "Адаптивная и семантическая вёрстка.",
       },
       {
         icon: ["fab", "js"],
         title: "JavaScript",
-        years: "4 месяца",
-        description:
-          "Базовые навыки работы с языком программирования для интерактивных элементов на сайте.",
+        years: "3 года",
+        description: "Динамика, интерактив, работа с DOM.",
       },
       {
         icon: ["fab", "vuejs"],
         title: "Vue.js",
-        years: "4 месяца",
-        description: "Создание компонентов, управление состоянием приложения.",
+        years: "2 года",
+        description: "SPA, компоненты, управление состоянием.",
       },
       {
         icon: ["fab", "git"],
         title: "Git",
-        years: "4 месяца",
-        description: "Основы работы с системами контроля версий.",
+        years: "3 года",
+        description: "Контроль версий, командная работа.",
+      },
+      {
+        icon: ["fab", "nuxt"],
+        title: "NuxtJS",
+        years: "1 год",
+        description: "SSR, маршрутизация, интеграция API.",
       },
     ],
     prod_v2: [
@@ -121,6 +126,90 @@ export default createStore({
         liveDemoLink: "https://welding-orenburg.vercel.app",
         githubLink: "https://github.com/w-jpk/welding-orenburg",
       },
+      {
+        id: 4,
+        title: "Сварка Аргоном | Оренбург",
+        date: "23.10.2024",
+        tag: "Frontend",
+        image: [
+          {
+            id: 1,
+            url: require("@/assets/img/welding orenburg/project-1.png"),
+          },
+          {
+            id: 2,
+            url: require("@/assets/img/welding orenburg/project-2.png"),
+          },
+          {
+            id: 3,
+            url: require("@/assets/img/welding orenburg/project-3.png"),
+          },
+        ],
+        clientname: "Сварка Аргоном",
+        clientservices: "Оренбург",
+        clientwebsite: "https://welding-orenburg.vercel.app",
+        toolstechnologies: "Vue.js, SCSS, TypeScript",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
+        liveDemoLink: "https://welding-orenburg.vercel.app",
+        githubLink: "https://github.com/w-jpk/welding-orenburg",
+      },
+      {
+        id: 5,
+        title: "Сварка Аргоном | Оренбург",
+        date: "23.10.2024",
+        tag: "Frontend",
+        image: [
+          {
+            id: 1,
+            url: require("@/assets/img/welding orenburg/project-1.png"),
+          },
+          {
+            id: 2,
+            url: require("@/assets/img/welding orenburg/project-2.png"),
+          },
+          {
+            id: 3,
+            url: require("@/assets/img/welding orenburg/project-3.png"),
+          },
+        ],
+        clientname: "Сварка Аргоном",
+        clientservices: "Оренбург",
+        clientwebsite: "https://welding-orenburg.vercel.app",
+        toolstechnologies: "Vue.js, SCSS, TypeScript",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
+        liveDemoLink: "https://welding-orenburg.vercel.app",
+        githubLink: "https://github.com/w-jpk/welding-orenburg",
+      },
+      {
+        id: 6,
+        title: "Сварка Аргоном | Оренбург",
+        date: "23.10.2024",
+        tag: "Frontend",
+        image: [
+          {
+            id: 1,
+            url: require("@/assets/img/welding orenburg/project-1.png"),
+          },
+          {
+            id: 2,
+            url: require("@/assets/img/welding orenburg/project-2.png"),
+          },
+          {
+            id: 3,
+            url: require("@/assets/img/welding orenburg/project-3.png"),
+          },
+        ],
+        clientname: "Сварка Аргоном",
+        clientservices: "Оренбург",
+        clientwebsite: "https://welding-orenburg.vercel.app",
+        toolstechnologies: "Vue.js, SCSS, TypeScript",
+        description:
+          "Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, officia.",
+        liveDemoLink: "https://welding-orenburg.vercel.app",
+        githubLink: "https://github.com/w-jpk/welding-orenburg",
+      },
     ],
     projects: [
       {
@@ -155,7 +244,7 @@ export default createStore({
       {
         icon: "briefcase",
         title: "Опыт работы",
-        description: "Без опыта",
+        description: "ГАПОУ 'ОКЭИ' <br /> Frontend-developer <br /> 2021-2022",
       },
       {
         icon: "graduation-cap",

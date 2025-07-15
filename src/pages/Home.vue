@@ -5,7 +5,7 @@
   <Experience />
   <Projects />
   <Contact />
-  <FooterBar />
+  <Footer />
 </template>
 
 <script>
@@ -15,7 +15,7 @@ import About from "../views/About.vue";
 import Experience from "../views/Experience.vue";
 import Projects from "../views/Projects.vue";
 import Contact from "../views/Contact.vue";
-import FooterBar from "../views/Footer.vue";
+import Footer from "../views/Footer.vue";
 
 export default {
   name: "Home",
@@ -26,7 +26,7 @@ export default {
     Experience,
     Projects,
     Contact,
-    FooterBar,
+    Footer,
   },
 };
 </script>

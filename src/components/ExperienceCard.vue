@@ -1,89 +1,23 @@
 <template>
-  <div class="grid-card">
-    <div class="grid-card-info">
-      <i>
-        <font-awesome-icon :icon="icon" />
-      </i>
-      <span>{{ title }}</span>
+  <div class="flex items-center gap-6 p-6 bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100">
+    <div class="flex-shrink-0 text-5xl text-green-500 drop-shadow-md">
+      <font-awesome-icon :icon="icon" />
     </div>
-    <h3>{{ years }}</h3>
-    <p>{{ description }}</p>
+    <div>
+      <h3 class="text-2xl font-bold text-gray-800 mb-1">{{ title }}</h3>
+      <p class="text-sm text-primary-600 font-semibold mb-2">{{ years }}</p>
+      <p class="text-base text-gray-600 leading-relaxed">{{ description }}</p>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "ExperienceCard",
   props: {
-    icon: {
-      type: Array,
-      required: true,
-      default: () => ["fas", "code"],
-    },
-    title: {
-      type: String,
-      required: true,
-      default: "Frontend Development",
-    },
-    years: {
-      type: String,
-      required: true,
-      default: "1 Year",
-    },
-    description: {
-      type: String,
-      required: true,
-      default:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea omnis labore nostrum explicabo aperiam vitae.",
-    },
+    icon: { type: [Array, String], required: true },
+    title: { type: String, required: true },
+    years: { type: String, required: true },
+    description: { type: String, required: true },
   },
 };
 </script>
-
-<style scoped>
-.grid-card {
-  border: 2px solid black;
-  border-radius: 3rem;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: baseline;
-  justify-content: left;
-  cursor: pointer;
-  transition: 0.2s ease-in-out;
-}
-
-.grid-card-info {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 0.5rem;
-}
-
-.grid-card-info:hover {
-  color: white;
-}
-
-.grid-card:hover {
-  transform: scale(1.02);
-  background-color: black;
-  color: white;
-}
-
-.grid-card i {
-  font-size: 1.5rem;
-}
-
-.grid-card span {
-  font-size: 1.5rem;
-  font-weight: 600;
-  background: linear-gradient(to right, rgb(0, 157, 255), rgb(255, 0, 255));
-  background-clip: text;
-  color: transparent;
-}
-
-.grid-card p {
-  margin-top: 0.5rem;
-  text-align: justify;
-}
-</style>
