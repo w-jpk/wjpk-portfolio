@@ -9,27 +9,37 @@
           Примеры моих работ и проектов
         </p>
       </div>
-      
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-if="loading" class="text-center py-12 text-primary-600 font-semibold">Загрузка проектов...</div>
+      <div v-else-if="error" class="text-center py-12 text-red-600 font-semibold">{{ error }}</div>
+      <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div 
           v-for="project in projects" 
           :key="project.id"
           class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden card-hover flex flex-col h-full"
         >
           <!-- Project Image -->
-          <div class="h-48 bg-gradient-to-br from-primary-100 to-blue-100 flex items-center justify-center">
-            <div class="text-center">
-              <div class="w-16 h-16 bg-gradient-to-r from-primary-600 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <CodeBracketIcon class="w-8 h-8 text-white" />
-              </div>
-              <h3 class="text-lg font-semibold text-gray-900">{{ project.name }}</h3>
+          <div class="h-52 bg-gray-100 flex items-center justify-center relative">
+            <img v-if="project.image" :src="project.image" :alt="project.name" class="object-cover w-full h-full" />
+            <div v-else class="w-16 h-16 bg-gradient-to-r from-primary-600 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <CodeBracketIcon class="w-8 h-8 text-white" />
+            </div>
+            <div class="absolute top-2 right-2 flex space-x-2" v-if="project.githubData">
+              <span class="flex items-center text-xs bg-white/80 rounded px-2 py-1 shadow">
+                <StarIcon class="w-4 h-4 text-yellow-500 mr-1" />{{ project.githubData.stars }}
+              </span>
+              <span class="flex items-center text-xs bg-white/80 rounded px-2 py-1 shadow">
+                <CodeBracketSquareIcon class="w-4 h-4 text-gray-500 mr-1" />{{ project.githubData.forks }}
+              </span>
+              <span class="flex items-center text-xs bg-white/80 rounded px-2 py-1 shadow">
+                <EyeIcon class="w-4 h-4 text-blue-500 mr-1" />{{ project.githubData.watchers }}
+              </span>
             </div>
           </div>
-          
           <!-- Project Content -->
           <div class="flex flex-col flex-1 p-6">
             <div>
-              <p class="text-gray-600 mb-4">{{ project.description }}</p>
+              <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ project.name }}</h3>
+              <p class="text-gray-600 mb-4 line-clamp-3">{{ project.githubData?.description || project.description }}</p>
               <!-- Technologies -->
               <div class="flex flex-wrap gap-2 mb-4">
                 <span 
@@ -41,7 +51,6 @@
                 </span>
               </div>
             </div>
-
             <!-- Project Links -->
             <div class="flex space-x-3 mt-auto">
               <a 
@@ -64,7 +73,6 @@
           </div>
         </div>
       </div>
-      
       <!-- View More Button -->
       <div class="text-center mt-12">
         <NuxtLink to="/projects" class="btn-secondary inline-flex items-center space-x-2">
@@ -77,56 +85,47 @@
 </template>
 
 <script setup lang="ts">
-import { CodeBracketIcon, ArrowRightIcon } from '@heroicons/vue/24/outline'
+import { onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useProjectsStore } from '@/store/projects'
+import { CodeBracketIcon, ArrowRightIcon, StarIcon, EyeIcon, CodeBracketSquareIcon } from '@heroicons/vue/24/outline'
 
-const projects = [
+const store = useProjectsStore()
+const { projects, loading, error } = storeToRefs(store)
+
+// Пример локальных проектов (можно расширить)
+const localProjects = [
   {
     id: 1,
-    name: 'E-commerce Platform',
+    name: 'W-JPK Portfolio',
     description: 'Современная платформа электронной коммерции с использованием Vue.js, TypeScript и Nuxt.js. Включает корзину покупок, систему платежей и админ-панель.',
-    technologies: ['Nuxt.js', 'TypeScript', 'Tailwind CSS', 'Pinia'],
-    liveUrl: '#',
-    githubUrl: '#'
+    liveUrl: 'https://wjpk-portfolio.vercel.app/',
+    githubUrl: 'https://github.com/w-jpk/wjpk-portfolio',
+    image: '/images/Avatar.png'
   },
   {
     id: 2,
-    name: 'Task Management App',
+    name: 'Сварка Оренбург',
     description: 'Приложение для управления задачами с drag-and-drop функциональностью, уведомлениями и командной работой.',
-    technologies: ['Vue.js', 'JavaScript', 'SCSS', 'LocalStorage'],
-    liveUrl: '#',
-    githubUrl: '#'
+    liveUrl: 'https://welding-orenburg.vercel.app/',
+    githubUrl: 'https://github.com/w-jpk/welding-orenburg',
+    image: '/images/Avatar.png'
   },
-  {
-    id: 3,
-    name: 'Weather Dashboard',
-    description: 'Интерактивная панель погоды с прогнозами, картами и красивой анимацией. Интеграция с внешними API.',
-    technologies: ['Vue.js', 'JavaScript', 'CSS3', 'REST API'],
-    liveUrl: '#',
-    githubUrl: '#'
-  },
-  {
-    id: 4,
-    name: 'Portfolio Website',
-    description: 'Современный адаптивный сайт-портфолио с анимациями, темной темой и оптимизацией для SEO.',
-    technologies: ['Vue.js', 'Nuxt.js', 'Tailwind CSS', 'TypeScript'],
-    liveUrl: '#',
-    githubUrl: '#'
-  },
-  {
-    id: 5,
-    name: 'Social Media Dashboard',
-    description: 'Панель управления социальными сетями с аналитикой, планировщиком постов и интеграцией с API.',
-    technologies: ['Vue.js', 'TypeScript', 'Chart.js', 'REST API'],
-    liveUrl: '#',
-    githubUrl: '#'
-  },
-  {
-    id: 6,
-    name: 'Recipe Finder',
-    description: 'Приложение для поиска рецептов с фильтрацией, избранным и пошаговыми инструкциями.',
-    technologies: ['Vue.js', 'JavaScript', 'CSS3', 'LocalStorage'],
-    liveUrl: '#',
-    githubUrl: '#'
-  }
 ]
-</script> 
+
+onMounted(async () => {
+  if (!projects.value.length) {
+    store.setProjects(localProjects)
+    await store.fetchGithubData()
+  }
+})
+</script>
+
+<style scoped>
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+</style> 

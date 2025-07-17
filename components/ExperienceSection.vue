@@ -153,7 +153,7 @@ const workExperience = [
 
 const educationHistory = [
   {
-    degree: 'Оренбургский Колледж Экономики и Информатики',
+    degree: 'ГАПОУ "ОКЭИ"',
     institution: 'Колледж',
     period: '2019 - 2023',
     description: 'Изучение основ программирования, веб-разработки и компьютерных наук.',
