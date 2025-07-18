@@ -43,7 +43,7 @@
               <!-- Technologies -->
               <div class="flex flex-wrap gap-2 mb-4">
                 <span 
-                  v-for="tech in project.technologies" 
+                  v-for="tech in (project.technologies || [])" 
                   :key="tech"
                   class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium"
                 >
@@ -101,7 +101,12 @@ const localProjects = [
     description: 'Современная платформа электронной коммерции с использованием Vue.js, TypeScript и Nuxt.js. Включает корзину покупок, систему платежей и админ-панель.',
     liveUrl: 'https://wjpk-portfolio.vercel.app/',
     githubUrl: 'https://github.com/w-jpk/wjpk-portfolio',
-    image: '/images/Avatar.png'
+    image: '/images/Avatar.png',
+    date: '2024',
+    duration: '2 месяца',
+    role: 'Frontend Developer',
+    features: ['Адаптивный дизайн', 'SEO оптимизация', 'GitHub API интеграция', 'Современный UI/UX'],
+    category: 'nuxt'
   },
   {
     id: 2,
@@ -109,7 +114,12 @@ const localProjects = [
     description: 'Приложение для управления задачами с drag-and-drop функциональностью, уведомлениями и командной работой.',
     liveUrl: 'https://welding-orenburg.vercel.app/',
     githubUrl: 'https://github.com/w-jpk/welding-orenburg',
-    image: '/images/Avatar.png'
+    image: '/images/Avatar.png',
+    date: '2024',
+    duration: '3 месяца',
+    role: 'Frontend Developer',
+    features: ['Адаптивный дизайн', 'Интерактивные элементы', 'Оптимизация производительности', 'Современный дизайн'],
+    category: 'vue'
   },
 ]
 

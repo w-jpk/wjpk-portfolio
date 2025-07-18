@@ -26,64 +26,75 @@
   <!-- Projects Grid -->
   <section class="py-16">
     <div class="container-custom px-4 sm:px-6 lg:px-8">
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div v-if="loading" class="text-center py-12 text-primary-600 font-semibold">Загрузка проектов...</div>
+      <div v-else-if="error" class="text-center py-12 text-red-600 font-semibold">{{ error }}</div>
+      <div v-else class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
         <div v-for="project in filteredProjects" :key="project.id"
-          class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden card-hover">
+          class="bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden card-hover flex flex-col h-full">
           <!-- Project Image -->
-          <div
-            class="h-48 bg-gradient-to-br from-primary-100 to-blue-100 flex items-center justify-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-gradient-to-br from-primary-500/20 to-blue-500/20"></div>
-            <div class="relative z-10 text-center">
-              <div
-                class="w-16 h-16 bg-gradient-to-r from-primary-600 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <CodeBracketIcon class="w-8 h-8 text-white" />
-              </div>
-              <h3 class="text-lg font-semibold text-gray-900">{{ project.name }}</h3>
+          <div class="h-52 bg-gray-100 flex items-center justify-center relative">
+            <img v-if="project.image" :src="project.image" :alt="project.name" class="object-cover w-full h-full" />
+            <div v-else class="w-16 h-16 bg-gradient-to-r from-primary-600 to-blue-600 rounded-lg flex items-center justify-center mx-auto mb-4">
+              <CodeBracketIcon class="w-8 h-8 text-white" />
+            </div>
+            <div class="absolute top-2 right-2 flex space-x-2" v-if="project.githubData">
+              <span class="flex items-center text-xs bg-white/80 rounded px-2 py-1 shadow">
+                <StarIcon class="w-4 h-4 text-yellow-500 mr-1" />{{ project.githubData.stars }}
+              </span>
+              <span class="flex items-center text-xs bg-white/80 rounded px-2 py-1 shadow">
+                <CodeBracketSquareIcon class="w-4 h-4 text-gray-500 mr-1" />{{ project.githubData.forks }}
+              </span>
+              <span class="flex items-center text-xs bg-white/80 rounded px-2 py-1 shadow">
+                <EyeIcon class="w-4 h-4 text-blue-500 mr-1" />{{ project.githubData.watchers }}
+              </span>
             </div>
           </div>
 
           <!-- Project Content -->
-          <div class="p-6">
-            <p class="text-gray-600 mb-4 line-clamp-3">{{ project.description }}</p>
+          <div class="flex flex-col flex-1 p-6">
+            <div>
+              <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ project.name }}</h3>
+              <p class="text-gray-600 mb-4 line-clamp-3">{{ project.githubData?.description || project.description }}</p>
 
-            <!-- Project Details -->
-            <div class="space-y-3 mb-4">
-              <div class="flex items-center space-x-2">
-                <CalendarIcon class="w-4 h-4 text-gray-400" />
-                <span class="text-sm text-gray-500">{{ project.date }}</span>
+              <!-- Project Details -->
+              <div class="space-y-3 mb-4">
+                <div class="flex items-center space-x-2">
+                  <CalendarIcon class="w-4 h-4 text-gray-400" />
+                  <span class="text-sm text-gray-500">{{ project.date || '2024' }}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <ClockIcon class="w-4 h-4 text-gray-400" />
+                  <span class="text-sm text-gray-500">{{ project.duration || '2 месяца' }}</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                  <UserGroupIcon class="w-4 h-4 text-gray-400" />
+                  <span class="text-sm text-gray-500">{{ project.role || 'Frontend Developer' }}</span>
+                </div>
               </div>
-              <div class="flex items-center space-x-2">
-                <ClockIcon class="w-4 h-4 text-gray-400" />
-                <span class="text-sm text-gray-500">{{ project.duration }}</span>
-              </div>
-              <div class="flex items-center space-x-2">
-                <UserGroupIcon class="w-4 h-4 text-gray-400" />
-                <span class="text-sm text-gray-500">{{ project.role }}</span>
-              </div>
-            </div>
 
-            <!-- Technologies -->
-            <div class="flex flex-wrap gap-2 mb-4">
-              <span v-for="tech in project.technologies" :key="tech"
-                class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium">
-                {{ tech }}
-              </span>
-            </div>
+              <!-- Technologies -->
+              <div class="flex flex-wrap gap-2 mb-4">
+                <span v-for="tech in (project.technologies || [])" :key="tech"
+                  class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full text-xs font-medium">
+                  {{ tech }}
+                </span>
+              </div>
 
-            <!-- Features -->
-            <div class="mb-4">
-              <h4 class="text-sm font-semibold text-gray-900 mb-2">Ключевые функции:</h4>
-              <ul class="space-y-1">
-                <li v-for="feature in project.features" :key="feature"
-                  class="text-sm text-gray-600 flex items-center space-x-2">
-                  <CheckIcon class="w-3 h-3 text-green-500 flex-shrink-0" />
-                  <span>{{ feature }}</span>
-                </li>
-              </ul>
+              <!-- Features -->
+              <div class="mb-4" v-if="project.features && project.features.length">
+                <h4 class="text-sm font-semibold text-gray-900 mb-2">Ключевые функции:</h4>
+                <ul class="space-y-1">
+                  <li v-for="feature in project.features" :key="feature"
+                    class="text-sm text-gray-600 flex items-center space-x-2">
+                    <CheckIcon class="w-3 h-3 text-green-500 flex-shrink-0" />
+                    <span>{{ feature }}</span>
+                  </li>
+                </ul>
+              </div>
             </div>
 
             <!-- Project Links -->
-            <div class="flex space-x-3">
+            <div class="flex space-x-3 mt-auto">
               <a v-if="project.liveUrl" :href="project.liveUrl" target="_blank"
                 class="flex-1 bg-primary-600 hover:bg-primary-700 text-white text-center py-2 px-4 rounded-lg text-sm font-medium transition-colors duration-200">
                 Живая версия
@@ -98,7 +109,7 @@
       </div>
 
       <!-- No Projects Message -->
-      <div v-if="filteredProjects.length === 0" class="text-center py-16">
+      <div v-if="!loading && !error && filteredProjects.length === 0" class="text-center py-16">
         <div class="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
           <FolderIcon class="w-12 h-12 text-gray-400" />
         </div>
@@ -110,14 +121,19 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
+import { useProjectsStore } from '@/store/projects'
 import {
   CodeBracketIcon,
   CalendarIcon,
   ClockIcon,
   UserGroupIcon,
   CheckIcon,
-  FolderIcon
+  FolderIcon,
+  StarIcon,
+  EyeIcon,
+  CodeBracketSquareIcon
 } from '@heroicons/vue/24/outline'
 
 // SEO
@@ -127,6 +143,9 @@ useHead({
     { name: 'description', content: 'Полная коллекция проектов фронтенд-разработчика W-JPK' }
   ]
 })
+
+const store = useProjectsStore()
+const { projects, loading, error } = storeToRefs(store)
 
 const activeFilter = ref('all')
 
@@ -139,131 +158,68 @@ const filters = [
   { id: 'dashboard', name: 'Dashboard' }
 ]
 
-const allProjects = [
+// Расширенные проекты с дополнительной информацией
+const extendedProjects = [
   {
     id: 1,
+    name: 'W-JPK Portfolio',
+    description: 'Современная платформа электронной коммерции с использованием Vue.js, TypeScript и Nuxt.js. Включает корзину покупок, систему платежей и админ-панель.',
+    liveUrl: 'https://wjpk-portfolio.vercel.app/',
+    githubUrl: 'https://github.com/w-jpk/wjpk-portfolio',
+    image: '/images/Avatar.png',
+    date: '2025',
+    duration: '2 месяца',
+    role: 'Frontend Developer',
+    features: ['Адаптивный дизайн', 'SEO оптимизация', 'GitHub API интеграция', 'Современный UI/UX'],
+    category: 'nuxt'
+  },
+  {
+    id: 2,
+    name: 'Сварка Оренбург',
+    description: 'Приложение для управления задачами с drag-and-drop функциональностью, уведомлениями и командной работой.',
+    liveUrl: 'https://welding-orenburg.vercel.app/',
+    githubUrl: 'https://github.com/w-jpk/welding-orenburg',
+    image: '/images/Avatar.png',
+    date: '2024',
+    duration: '3 месяца',
+    role: 'Frontend Developer',
+    features: ['Адаптивный дизайн', 'Интерактивные элементы', 'Оптимизация производительности', 'Современный дизайн'],
+    category: 'nuxt'
+  },
+  {
+    id: 3,
     name: 'E-commerce Platform',
     description: 'Современная платформа электронной коммерции с полным функционалом: корзина покупок, система платежей, админ-панель, управление товарами и заказами.',
     technologies: ['Vue.js', 'TypeScript', 'Nuxt.js', 'Tailwind CSS', 'Pinia', 'Stripe'],
+    liveUrl: '#',
+    githubUrl: '#',
+    image: '/images/Avatar.png',
     date: '2024',
     duration: '3 месяца',
     role: 'Frontend Developer',
     features: ['Корзина покупок', 'Система платежей', 'Админ-панель', 'Управление товарами'],
-    liveUrl: '#',
-    githubUrl: '#',
     category: 'ecommerce'
   },
-  {
-    id: 2,
-    name: 'Task Management App',
-    description: 'Приложение для управления задачами с drag-and-drop функциональностью, уведомлениями, командной работой и аналитикой.',
-    technologies: ['Vue.js', 'JavaScript', 'SCSS', 'LocalStorage', 'Chart.js'],
-    date: '2023',
-    duration: '2 месяца',
-    role: 'Full Stack Developer',
-    features: ['Drag & Drop', 'Уведомления', 'Командная работа', 'Аналитика'],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'dashboard'
-  },
-  {
-    id: 3,
-    name: 'Weather Dashboard',
-    description: 'Интерактивная панель погоды с прогнозами, картами, красивой анимацией и интеграцией с внешними API.',
-    technologies: ['Vue.js', 'JavaScript', 'CSS3', 'REST API', 'Chart.js'],
-    date: '2023',
-    duration: '1 месяц',
-    role: 'Frontend Developer',
-    features: ['Прогнозы погоды', 'Интерактивные карты', 'Анимации', 'API интеграция'],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'dashboard'
-  },
-  {
-    id: 4,
-    name: 'Portfolio Website',
-    description: 'Современный адаптивный сайт-портфолио с анимациями, темной темой, оптимизацией для SEO и быстрой загрузкой.',
-    technologies: ['Vue.js', 'Nuxt.js', 'Tailwind CSS', 'TypeScript', 'Framer Motion'],
-    date: '2024',
-    duration: '2 недели',
-    role: 'Frontend Developer',
-    features: ['Адаптивный дизайн', 'Темная тема', 'SEO оптимизация', 'Анимации'],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'nuxt'
-  },
-  {
-    id: 5,
-    name: 'Social Media Dashboard',
-    description: 'Панель управления социальными сетями с аналитикой, планировщиком постов, интеграцией с API и отчетами.',
-    technologies: ['Vue.js', 'TypeScript', 'Chart.js', 'REST API', 'Vuex'],
-    date: '2023',
-    duration: '2.5 месяца',
-    role: 'Frontend Developer',
-    features: ['Аналитика', 'Планировщик постов', 'API интеграция', 'Отчеты'],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'dashboard'
-  },
-  {
-    id: 6,
-    name: 'Recipe Finder',
-    description: 'Приложение для поиска рецептов с фильтрацией, избранным, пошаговыми инструкциями и расчетом порций.',
-    technologies: ['Vue.js', 'JavaScript', 'CSS3', 'LocalStorage', 'Spoonacular API'],
-    date: '2023',
-    duration: '1.5 месяца',
-    role: 'Frontend Developer',
-    features: ['Поиск рецептов', 'Фильтрация', 'Избранное', 'Расчет порций'],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'vue'
-  },
-  {
-    id: 7,
-    name: 'Real Estate Platform',
-    description: 'Платформа для поиска недвижимости с картами, фильтрами, избранным и системой бронирования просмотров.',
-    technologies: ['Vue.js', 'TypeScript', 'Nuxt.js', 'Mapbox', 'Stripe'],
-    date: '2024',
-    duration: '4 месяца',
-    role: 'Frontend Developer',
-    features: ['Поиск недвижимости', 'Интерактивные карты', 'Бронирование', 'Платежи'],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'nuxt'
-  },
-  {
-    id: 8,
-    name: 'Fitness Tracker',
-    description: 'Приложение для отслеживания тренировок с календарем, статистикой, планами тренировок и достижениями.',
-    technologies: ['Vue.js', 'TypeScript', 'PWA', 'IndexedDB', 'Chart.js'],
-    date: '2023',
-    duration: '3 месяца',
-    role: 'Full Stack Developer',
-    features: ['Отслеживание тренировок', 'Статистика', 'Планы тренировок', 'PWA'],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'typescript'
-  },
-  {
-    id: 9,
-    name: 'Blog Platform',
-    description: 'Современная платформа для блогов с редактором, комментариями, подписками и SEO оптимизацией.',
-    technologies: ['Vue.js', 'Nuxt.js', 'TypeScript', 'Markdown', 'Prisma'],
-    date: '2024',
-    duration: '2 месяца',
-    role: 'Frontend Developer',
-    features: ['Редактор статей', 'Комментарии', 'Подписки', 'SEO оптимизация'],
-    liveUrl: '#',
-    githubUrl: '#',
-    category: 'nuxt'
-  }
 ]
 
 const filteredProjects = computed(() => {
   if (activeFilter.value === 'all') {
-    return allProjects
+    return projects.value
   }
-  return allProjects.filter(project => project.category === activeFilter.value)
+  return projects.value.filter(project => {
+    const projectCategory = project.category || 
+      (project.technologies?.some(tech => 
+        tech.toLowerCase().includes(activeFilter.value.toLowerCase())
+      ) ? activeFilter.value : null)
+    return projectCategory === activeFilter.value
+  })
+})
+
+onMounted(async () => {
+  if (!projects.value.length) {
+    store.setProjects(extendedProjects)
+    await store.fetchGithubData()
+  }
 })
 </script>
 

@@ -4,10 +4,15 @@ export interface Project {
   id: number
   name: string
   description: string
-  technologies: string[]
+  technologies?: string[]
   liveUrl?: string
   githubUrl?: string
   image?: string
+  date?: string
+  duration?: string
+  role?: string
+  features?: string[]
+  category?: string
   githubData?: {
     stars: number
     forks: number
